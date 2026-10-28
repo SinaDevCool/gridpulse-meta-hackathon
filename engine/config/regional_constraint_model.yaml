@@ -1,0 +1,38 @@
+schema_version: regional-constraint-model-v1
+regions: [DE-BE, DE-BB, DE-HB, DE-HE-FRA, DE-RHEIN-MAIN]
+priority_regions: [DE-BE, DE-BB]
+horizons_hours: [1, 6, 24, 48]
+targets:
+  - constraint_event
+  - redispatch_active_hour
+  - congestion_intensity_band
+temporal_evaluation:
+  method: rolling_origin_whole_period_holdout
+  fit_calibration_on_prior_periods_only: true
+  random_split_prohibited: true
+models:
+  - historical_event_rate
+  - seasonal_calendar_baseline
+  - logistic_regression
+  - regularized_tree
+  - tabpfn_when_size_and_api_allow
+calibration: [platt, isotonic]
+metrics:
+  - precision
+  - recall
+  - false_negative_rate
+  - pr_auc
+  - roc_auc
+  - brier_score
+  - calibration_error
+release_gates:
+  require_admitted_source: true
+  require_complete_publication_archive: true
+  require_yearly_holdouts: 3
+  minimum_yearly_precision: 0.50
+  maximum_yearly_precision_range: 0.15
+  maximum_false_negative_rate: 0.20
+  maximum_calibration_error: 0.10
+  require_better_pr_auc_than_historical_rate: true
+  abstain_during_unvalidated_missing_source_periods: true
+current_status: failed_no_training_admissible_regional_event_source

@@ -1,0 +1,1062 @@
+{
+  "generated_at": "2026-08-14T01:06:44.952688+00:00",
+  "study_area": "Berlin",
+  "decision": "Public evidence is insufficient for available-MW claims at grid nodes.",
+  "permitted_outputs": [
+    "published demand and allocation history",
+    "constraint and reinforcement context",
+    "experimental relative ranking with validation warnings"
+  ],
+  "prohibited_outputs": [
+    "live nodal headroom",
+    "connection feasibility",
+    "capacity, cost, or delivery promises"
+  ],
+  "sources": [
+    {
+      "id": "simbench_datasets",
+      "publisher": "SimBench consortium",
+      "url": "https://simbench.de/en/download/datasets/",
+      "truth_class": "synthetic_demonstration",
+      "purposes": [
+        "method_validation",
+        "sensitivity_testing"
+      ],
+      "prohibited_uses": [
+        "berlin_live_capacity"
+      ],
+      "quality": [
+        {
+          "source_id": "simbench_datasets",
+          "intended_role": "method_validation",
+          "authority": 4,
+          "geographic_specificity": 2,
+          "temporal_freshness": 4,
+          "electrical_specificity": 4,
+          "completeness": 3,
+          "reproducibility": 4,
+          "licence_clarity": 3,
+          "usable": true,
+          "limitations": [
+            "Not suitable for berlin_live_capacity."
+          ],
+          "score": 68.6
+        },
+        {
+          "source_id": "simbench_datasets",
+          "intended_role": "sensitivity_testing",
+          "authority": 4,
+          "geographic_specificity": 2,
+          "temporal_freshness": 4,
+          "electrical_specificity": 4,
+          "completeness": 3,
+          "reproducibility": 4,
+          "licence_clarity": 3,
+          "usable": true,
+          "limitations": [
+            "Not suitable for berlin_live_capacity."
+          ],
+          "score": 68.6
+        }
+      ]
+    },
+    {
+      "id": "stromnetz_berlin_enwg",
+      "publisher": "Stromnetz Berlin GmbH",
+      "url": "https://www.stromnetz.berlin/uber-uns/veroffentlichungspflichten/energiewirtschaftsgesetz-enwg/",
+      "truth_class": "operator_published",
+      "purposes": [
+        "demand",
+        "equipment_summary"
+      ],
+      "prohibited_uses": [
+        "nodal_headroom",
+        "connection_feasibility"
+      ],
+      "quality": [
+        {
+          "source_id": "stromnetz_berlin_enwg",
+          "intended_role": "demand",
+          "authority": 5,
+          "geographic_specificity": 5,
+          "temporal_freshness": 4,
+          "electrical_specificity": 4,
+          "completeness": 3,
+          "reproducibility": 4,
+          "licence_clarity": 3,
+          "usable": true,
+          "limitations": [
+            "Not suitable for nodal_headroom.",
+            "Not suitable for connection_feasibility."
+          ],
+          "score": 80.0
+        },
+        {
+          "source_id": "stromnetz_berlin_enwg",
+          "intended_role": "equipment_summary",
+          "authority": 5,
+          "geographic_specificity": 5,
+          "temporal_freshness": 4,
+          "electrical_specificity": 4,
+          "completeness": 3,
+          "reproducibility": 4,
+          "licence_clarity": 3,
+          "usable": true,
+          "limitations": [
+            "Not suitable for nodal_headroom.",
+            "Not suitable for connection_feasibility."
+          ],
+          "score": 80.0
+        }
+      ]
+    },
+    {
+      "id": "stromnetz_berlin_repartierung",
+      "publisher": "Stromnetz Berlin GmbH",
+      "url": "https://www.stromnetz.berlin/anschliessen/anschluss-mittel-hochspannung/repartierung/",
+      "truth_class": "operator_published",
+      "purposes": [
+        "historical_allocation",
+        "constraint_signal"
+      ],
+      "prohibited_uses": [
+        "current_residual_capacity",
+        "nodal_headroom"
+      ],
+      "quality": [
+        {
+          "source_id": "stromnetz_berlin_repartierung",
+          "intended_role": "historical_allocation",
+          "authority": 5,
+          "geographic_specificity": 5,
+          "temporal_freshness": 4,
+          "electrical_specificity": 4,
+          "completeness": 3,
+          "reproducibility": 4,
+          "licence_clarity": 3,
+          "usable": true,
+          "limitations": [
+            "Not suitable for current_residual_capacity.",
+            "Not suitable for nodal_headroom."
+          ],
+          "score": 80.0
+        },
+        {
+          "source_id": "stromnetz_berlin_repartierung",
+          "intended_role": "constraint_signal",
+          "authority": 5,
+          "geographic_specificity": 5,
+          "temporal_freshness": 4,
+          "electrical_specificity": 4,
+          "completeness": 3,
+          "reproducibility": 4,
+          "licence_clarity": 3,
+          "usable": true,
+          "limitations": [
+            "Not suitable for current_residual_capacity.",
+            "Not suitable for nodal_headroom."
+          ],
+          "score": 80.0
+        }
+      ]
+    },
+    {
+      "id": "stromnetz_berlin_allocation_2025",
+      "publisher": "Stromnetz Berlin GmbH",
+      "url": "https://www.stromnetz.berlin/uber-uns/presse/pressemitteilungen-2025/antragsteller-fuer-sehr-grosse-netzanschluesse-wurden-ueber-ergebnis-im-diesjaehrigen-zuteilungsverfahren-informiert/",
+      "truth_class": "operator_published",
+      "purposes": [
+        "historical_allocation",
+        "constraint_signal"
+      ],
+      "prohibited_uses": [
+        "current_residual_capacity",
+        "nodal_headroom"
+      ],
+      "quality": [
+        {
+          "source_id": "stromnetz_berlin_allocation_2025",
+          "intended_role": "historical_allocation",
+          "authority": 5,
+          "geographic_specificity": 5,
+          "temporal_freshness": 4,
+          "electrical_specificity": 4,
+          "completeness": 3,
+          "reproducibility": 4,
+          "licence_clarity": 3,
+          "usable": true,
+          "limitations": [
+            "Not suitable for current_residual_capacity.",
+            "Not suitable for nodal_headroom."
+          ],
+          "score": 80.0
+        },
+        {
+          "source_id": "stromnetz_berlin_allocation_2025",
+          "intended_role": "constraint_signal",
+          "authority": 5,
+          "geographic_specificity": 5,
+          "temporal_freshness": 4,
+          "electrical_specificity": 4,
+          "completeness": 3,
+          "reproducibility": 4,
+          "licence_clarity": 3,
+          "usable": true,
+          "limitations": [
+            "Not suitable for current_residual_capacity.",
+            "Not suitable for nodal_headroom."
+          ],
+          "score": 80.0
+        }
+      ]
+    },
+    {
+      "id": "stromnetz_berlin_kraftnav",
+      "publisher": "Stromnetz Berlin GmbH",
+      "url": "https://www.stromnetz.berlin/uber-uns/veroffentlichungspflichten/kraftwerksnetzanschlussverordnung-kraftnav/",
+      "truth_class": "operator_published",
+      "purposes": [
+        "topology",
+        "node_identity"
+      ],
+      "prohibited_uses": [
+        "branch_ratings",
+        "nodal_headroom"
+      ],
+      "quality": [
+        {
+          "source_id": "stromnetz_berlin_kraftnav",
+          "intended_role": "topology",
+          "authority": 5,
+          "geographic_specificity": 5,
+          "temporal_freshness": 4,
+          "electrical_specificity": 4,
+          "completeness": 3,
+          "reproducibility": 4,
+          "licence_clarity": 3,
+          "usable": true,
+          "limitations": [
+            "Not suitable for branch_ratings.",
+            "Not suitable for nodal_headroom."
+          ],
+          "score": 80.0
+        },
+        {
+          "source_id": "stromnetz_berlin_kraftnav",
+          "intended_role": "node_identity",
+          "authority": 5,
+          "geographic_specificity": 5,
+          "temporal_freshness": 4,
+          "electrical_specificity": 4,
+          "completeness": 3,
+          "reproducibility": 4,
+          "licence_clarity": 3,
+          "usable": true,
+          "limitations": [
+            "Not suitable for branch_ratings.",
+            "Not suitable for nodal_headroom."
+          ],
+          "score": 80.0
+        }
+      ]
+    },
+    {
+      "id": "stromnetz_berlin_hv_requirements",
+      "publisher": "Stromnetz Berlin GmbH",
+      "url": "https://www.stromnetz.berlin/anschliessen/anschluss-mittel-hochspannung/",
+      "truth_class": "operator_published",
+      "purposes": [
+        "security_policy",
+        "equipment_requirements"
+      ],
+      "prohibited_uses": [
+        "nodal_headroom"
+      ],
+      "quality": [
+        {
+          "source_id": "stromnetz_berlin_hv_requirements",
+          "intended_role": "security_policy",
+          "authority": 5,
+          "geographic_specificity": 5,
+          "temporal_freshness": 4,
+          "electrical_specificity": 4,
+          "completeness": 3,
+          "reproducibility": 4,
+          "licence_clarity": 3,
+          "usable": true,
+          "limitations": [
+            "Not suitable for nodal_headroom."
+          ],
+          "score": 80.0
+        },
+        {
+          "source_id": "stromnetz_berlin_hv_requirements",
+          "intended_role": "equipment_requirements",
+          "authority": 5,
+          "geographic_specificity": 5,
+          "temporal_freshness": 4,
+          "electrical_specificity": 4,
+          "completeness": 3,
+          "reproducibility": 4,
+          "licence_clarity": 3,
+          "usable": true,
+          "limitations": [
+            "Not suitable for nodal_headroom."
+          ],
+          "score": 80.0
+        }
+      ]
+    },
+    {
+      "id": "dwd_hourly_climate",
+      "publisher": "Deutscher Wetterdienst Climate Data Center",
+      "url": "https://opendata.dwd.de/climate_environment/CDC/observations_germany/climate/hourly/",
+      "truth_class": "operator_published",
+      "purposes": [
+        "weather_context",
+        "load_forecasting"
+      ],
+      "prohibited_uses": [
+        "grid_capacity",
+        "grid_feasibility"
+      ],
+      "quality": [
+        {
+          "source_id": "dwd_hourly_climate",
+          "intended_role": "weather_context",
+          "authority": 1,
+          "geographic_specificity": 3,
+          "temporal_freshness": 4,
+          "electrical_specificity": 2,
+          "completeness": 3,
+          "reproducibility": 4,
+          "licence_clarity": 3,
+          "usable": false,
+          "limitations": [
+            "Not suitable for grid_capacity.",
+            "Not suitable for grid_feasibility."
+          ],
+          "score": 57.1
+        },
+        {
+          "source_id": "dwd_hourly_climate",
+          "intended_role": "load_forecasting",
+          "authority": 1,
+          "geographic_specificity": 3,
+          "temporal_freshness": 4,
+          "electrical_specificity": 2,
+          "completeness": 3,
+          "reproducibility": 4,
+          "licence_clarity": 3,
+          "usable": false,
+          "limitations": [
+            "Not suitable for grid_capacity.",
+            "Not suitable for grid_feasibility."
+          ],
+          "score": 57.1
+        }
+      ]
+    },
+    {
+      "id": "entsoe_outage_api",
+      "publisher": "ENTSO-E Transparency Platform",
+      "url": "https://transparency.entsoe.eu/content/static_content/download?path=%2FStatic%20content%2Fweb%20api%2FIG-for-TP-data-extraction-process.pdf",
+      "truth_class": "operator_published",
+      "purposes": [
+        "outage_context",
+        "stress_forecasting"
+      ],
+      "prohibited_uses": [
+        "substation_headroom",
+        "unreported_outage_inference"
+      ],
+      "quality": [
+        {
+          "source_id": "entsoe_outage_api",
+          "intended_role": "outage_context",
+          "authority": 1,
+          "geographic_specificity": 2,
+          "temporal_freshness": 4,
+          "electrical_specificity": 2,
+          "completeness": 3,
+          "reproducibility": 4,
+          "licence_clarity": 3,
+          "usable": false,
+          "limitations": [
+            "Not suitable for substation_headroom.",
+            "Not suitable for unreported_outage_inference."
+          ],
+          "score": 54.3
+        },
+        {
+          "source_id": "entsoe_outage_api",
+          "intended_role": "stress_forecasting",
+          "authority": 1,
+          "geographic_specificity": 2,
+          "temporal_freshness": 4,
+          "electrical_specificity": 2,
+          "completeness": 3,
+          "reproducibility": 4,
+          "licence_clarity": 3,
+          "usable": false,
+          "limitations": [
+            "Not suitable for substation_headroom.",
+            "Not suitable for unreported_outage_inference."
+          ],
+          "score": 54.3
+        }
+      ]
+    },
+    {
+      "id": "fifty_hertz_congestion",
+      "publisher": "50Hertz Transmission GmbH",
+      "url": "https://www.50hertz.com/de/Transparenz/Kennzahlen/Engpassmanagement",
+      "truth_class": "constraint_detected",
+      "purposes": [
+        "congestion",
+        "upstream_stress"
+      ],
+      "prohibited_uses": [
+        "distribution_nodal_headroom"
+      ],
+      "quality": [
+        {
+          "source_id": "fifty_hertz_congestion",
+          "intended_role": "congestion",
+          "authority": 5,
+          "geographic_specificity": 2,
+          "temporal_freshness": 4,
+          "electrical_specificity": 4,
+          "completeness": 3,
+          "reproducibility": 4,
+          "licence_clarity": 3,
+          "usable": true,
+          "limitations": [
+            "Not suitable for distribution_nodal_headroom."
+          ],
+          "score": 71.4
+        },
+        {
+          "source_id": "fifty_hertz_congestion",
+          "intended_role": "upstream_stress",
+          "authority": 5,
+          "geographic_specificity": 2,
+          "temporal_freshness": 4,
+          "electrical_specificity": 4,
+          "completeness": 3,
+          "reproducibility": 4,
+          "licence_clarity": 3,
+          "usable": true,
+          "limitations": [
+            "Not suitable for distribution_nodal_headroom."
+          ],
+          "score": 71.4
+        }
+      ]
+    },
+    {
+      "id": "smard_download_center",
+      "publisher": "Bundesnetzagentur",
+      "url": "https://www.smard.de/home/downloadcenter",
+      "truth_class": "operator_published",
+      "purposes": [
+        "system_demand",
+        "scenario_context"
+      ],
+      "prohibited_uses": [
+        "substation_loading",
+        "nodal_headroom"
+      ],
+      "quality": [
+        {
+          "source_id": "smard_download_center",
+          "intended_role": "system_demand",
+          "authority": 5,
+          "geographic_specificity": 3,
+          "temporal_freshness": 4,
+          "electrical_specificity": 2,
+          "completeness": 3,
+          "reproducibility": 4,
+          "licence_clarity": 3,
+          "usable": true,
+          "limitations": [
+            "Not suitable for substation_loading.",
+            "Not suitable for nodal_headroom."
+          ],
+          "score": 68.6
+        },
+        {
+          "source_id": "smard_download_center",
+          "intended_role": "scenario_context",
+          "authority": 5,
+          "geographic_specificity": 3,
+          "temporal_freshness": 4,
+          "electrical_specificity": 2,
+          "completeness": 3,
+          "reproducibility": 4,
+          "licence_clarity": 3,
+          "usable": true,
+          "limitations": [
+            "Not suitable for substation_loading.",
+            "Not suitable for nodal_headroom."
+          ],
+          "score": 68.6
+        }
+      ]
+    },
+    {
+      "id": "vnbdigital_network_plans",
+      "publisher": "VNBdigital",
+      "url": "https://www.vnbdigital.de/",
+      "truth_class": "planned_reinforcement",
+      "purposes": [
+        "reinforcement",
+        "demand_development"
+      ],
+      "prohibited_uses": [
+        "live_capacity"
+      ],
+      "quality": [
+        {
+          "source_id": "vnbdigital_network_plans",
+          "intended_role": "reinforcement",
+          "authority": 4,
+          "geographic_specificity": 3,
+          "temporal_freshness": 4,
+          "electrical_specificity": 4,
+          "completeness": 3,
+          "reproducibility": 4,
+          "licence_clarity": 3,
+          "usable": true,
+          "limitations": [
+            "Not suitable for live_capacity."
+          ],
+          "score": 71.4
+        },
+        {
+          "source_id": "vnbdigital_network_plans",
+          "intended_role": "demand_development",
+          "authority": 4,
+          "geographic_specificity": 3,
+          "temporal_freshness": 4,
+          "electrical_specificity": 4,
+          "completeness": 3,
+          "reproducibility": 4,
+          "licence_clarity": 3,
+          "usable": true,
+          "limitations": [
+            "Not suitable for live_capacity."
+          ],
+          "score": 71.4
+        }
+      ]
+    },
+    {
+      "id": "geofabrik_germany",
+      "publisher": "Geofabrik GmbH / OpenStreetMap contributors",
+      "url": "https://download.geofabrik.de/europe/germany.html",
+      "truth_class": "public_screening",
+      "purposes": [
+        "geospatial_crosswalk",
+        "topology_hypothesis"
+      ],
+      "prohibited_uses": [
+        "capacity",
+        "feasibility",
+        "official_coordinates"
+      ],
+      "quality": [
+        {
+          "source_id": "geofabrik_germany",
+          "intended_role": "geospatial_crosswalk",
+          "authority": 2,
+          "geographic_specificity": 3,
+          "temporal_freshness": 4,
+          "electrical_specificity": 2,
+          "completeness": 3,
+          "reproducibility": 4,
+          "licence_clarity": 3,
+          "usable": false,
+          "limitations": [
+            "Not suitable for capacity.",
+            "Not suitable for feasibility.",
+            "Not suitable for official_coordinates."
+          ],
+          "score": 60.0
+        },
+        {
+          "source_id": "geofabrik_germany",
+          "intended_role": "topology_hypothesis",
+          "authority": 2,
+          "geographic_specificity": 3,
+          "temporal_freshness": 4,
+          "electrical_specificity": 2,
+          "completeness": 3,
+          "reproducibility": 4,
+          "licence_clarity": 3,
+          "usable": false,
+          "limitations": [
+            "Not suitable for capacity.",
+            "Not suitable for feasibility.",
+            "Not suitable for official_coordinates."
+          ],
+          "score": 60.0
+        }
+      ]
+    },
+    {
+      "id": "dwd_open_data",
+      "publisher": "Deutscher Wetterdienst",
+      "url": "https://opendata.dwd.de/",
+      "truth_class": "operator_published",
+      "purposes": [
+        "weather_history",
+        "weather_features"
+      ],
+      "prohibited_uses": [
+        "nodal_headroom",
+        "connection_feasibility"
+      ],
+      "quality": [
+        {
+          "source_id": "dwd_open_data",
+          "intended_role": "weather_history",
+          "authority": 1,
+          "geographic_specificity": 3,
+          "temporal_freshness": 4,
+          "electrical_specificity": 2,
+          "completeness": 3,
+          "reproducibility": 4,
+          "licence_clarity": 3,
+          "usable": false,
+          "limitations": [
+            "Not suitable for nodal_headroom.",
+            "Not suitable for connection_feasibility."
+          ],
+          "score": 57.1
+        },
+        {
+          "source_id": "dwd_open_data",
+          "intended_role": "weather_features",
+          "authority": 1,
+          "geographic_specificity": 3,
+          "temporal_freshness": 4,
+          "electrical_specificity": 2,
+          "completeness": 3,
+          "reproducibility": 4,
+          "licence_clarity": 3,
+          "usable": false,
+          "limitations": [
+            "Not suitable for nodal_headroom.",
+            "Not suitable for connection_feasibility."
+          ],
+          "score": 57.1
+        }
+      ]
+    },
+    {
+      "id": "entsoe_transparency",
+      "publisher": "ENTSO-E",
+      "url": "https://transparency.entsoe.eu/",
+      "truth_class": "operator_published",
+      "purposes": [
+        "load",
+        "generation",
+        "outages",
+        "congestion_context"
+      ],
+      "prohibited_uses": [
+        "distribution_nodal_headroom",
+        "connection_feasibility"
+      ],
+      "quality": [
+        {
+          "source_id": "entsoe_transparency",
+          "intended_role": "load",
+          "authority": 1,
+          "geographic_specificity": 3,
+          "temporal_freshness": 4,
+          "electrical_specificity": 2,
+          "completeness": 3,
+          "reproducibility": 4,
+          "licence_clarity": 3,
+          "usable": false,
+          "limitations": [
+            "Not suitable for distribution_nodal_headroom.",
+            "Not suitable for connection_feasibility."
+          ],
+          "score": 57.1
+        },
+        {
+          "source_id": "entsoe_transparency",
+          "intended_role": "generation",
+          "authority": 1,
+          "geographic_specificity": 3,
+          "temporal_freshness": 4,
+          "electrical_specificity": 2,
+          "completeness": 3,
+          "reproducibility": 4,
+          "licence_clarity": 3,
+          "usable": false,
+          "limitations": [
+            "Not suitable for distribution_nodal_headroom.",
+            "Not suitable for connection_feasibility."
+          ],
+          "score": 57.1
+        },
+        {
+          "source_id": "entsoe_transparency",
+          "intended_role": "outages",
+          "authority": 1,
+          "geographic_specificity": 3,
+          "temporal_freshness": 4,
+          "electrical_specificity": 2,
+          "completeness": 3,
+          "reproducibility": 4,
+          "licence_clarity": 3,
+          "usable": false,
+          "limitations": [
+            "Not suitable for distribution_nodal_headroom.",
+            "Not suitable for connection_feasibility."
+          ],
+          "score": 57.1
+        },
+        {
+          "source_id": "entsoe_transparency",
+          "intended_role": "congestion_context",
+          "authority": 1,
+          "geographic_specificity": 3,
+          "temporal_freshness": 4,
+          "electrical_specificity": 2,
+          "completeness": 3,
+          "reproducibility": 4,
+          "licence_clarity": 3,
+          "usable": false,
+          "limitations": [
+            "Not suitable for distribution_nodal_headroom.",
+            "Not suitable for connection_feasibility."
+          ],
+          "score": 57.1
+        }
+      ]
+    },
+    {
+      "id": "tennet_transparency",
+      "publisher": "TenneT TSO GmbH",
+      "url": "https://www.tennet.eu/markets/transparency",
+      "truth_class": "constraint_detected",
+      "purposes": [
+        "congestion",
+        "outages",
+        "upstream_stress"
+      ],
+      "prohibited_uses": [
+        "distribution_nodal_headroom",
+        "connection_feasibility"
+      ],
+      "quality": [
+        {
+          "source_id": "tennet_transparency",
+          "intended_role": "congestion",
+          "authority": 5,
+          "geographic_specificity": 3,
+          "temporal_freshness": 4,
+          "electrical_specificity": 4,
+          "completeness": 3,
+          "reproducibility": 4,
+          "licence_clarity": 3,
+          "usable": true,
+          "limitations": [
+            "Not suitable for distribution_nodal_headroom.",
+            "Not suitable for connection_feasibility."
+          ],
+          "score": 74.3
+        },
+        {
+          "source_id": "tennet_transparency",
+          "intended_role": "outages",
+          "authority": 5,
+          "geographic_specificity": 3,
+          "temporal_freshness": 4,
+          "electrical_specificity": 4,
+          "completeness": 3,
+          "reproducibility": 4,
+          "licence_clarity": 3,
+          "usable": true,
+          "limitations": [
+            "Not suitable for distribution_nodal_headroom.",
+            "Not suitable for connection_feasibility."
+          ],
+          "score": 74.3
+        },
+        {
+          "source_id": "tennet_transparency",
+          "intended_role": "upstream_stress",
+          "authority": 5,
+          "geographic_specificity": 3,
+          "temporal_freshness": 4,
+          "electrical_specificity": 4,
+          "completeness": 3,
+          "reproducibility": 4,
+          "licence_clarity": 3,
+          "usable": true,
+          "limitations": [
+            "Not suitable for distribution_nodal_headroom.",
+            "Not suitable for connection_feasibility."
+          ],
+          "score": 74.3
+        }
+      ]
+    },
+    {
+      "id": "amprion_transparency",
+      "publisher": "Amprion GmbH",
+      "url": "https://www.amprion.net/Grid-Data/",
+      "truth_class": "constraint_detected",
+      "purposes": [
+        "congestion",
+        "outages",
+        "upstream_stress"
+      ],
+      "prohibited_uses": [
+        "distribution_nodal_headroom",
+        "connection_feasibility"
+      ],
+      "quality": [
+        {
+          "source_id": "amprion_transparency",
+          "intended_role": "congestion",
+          "authority": 5,
+          "geographic_specificity": 2,
+          "temporal_freshness": 4,
+          "electrical_specificity": 4,
+          "completeness": 3,
+          "reproducibility": 4,
+          "licence_clarity": 3,
+          "usable": true,
+          "limitations": [
+            "Not suitable for distribution_nodal_headroom.",
+            "Not suitable for connection_feasibility."
+          ],
+          "score": 71.4
+        },
+        {
+          "source_id": "amprion_transparency",
+          "intended_role": "outages",
+          "authority": 5,
+          "geographic_specificity": 2,
+          "temporal_freshness": 4,
+          "electrical_specificity": 4,
+          "completeness": 3,
+          "reproducibility": 4,
+          "licence_clarity": 3,
+          "usable": true,
+          "limitations": [
+            "Not suitable for distribution_nodal_headroom.",
+            "Not suitable for connection_feasibility."
+          ],
+          "score": 71.4
+        },
+        {
+          "source_id": "amprion_transparency",
+          "intended_role": "upstream_stress",
+          "authority": 5,
+          "geographic_specificity": 2,
+          "temporal_freshness": 4,
+          "electrical_specificity": 4,
+          "completeness": 3,
+          "reproducibility": 4,
+          "licence_clarity": 3,
+          "usable": true,
+          "limitations": [
+            "Not suitable for distribution_nodal_headroom.",
+            "Not suitable for connection_feasibility."
+          ],
+          "score": 71.4
+        }
+      ]
+    },
+    {
+      "id": "wesernetz_publications",
+      "publisher": "wesernetz Bremen GmbH",
+      "url": "https://www.wesernetz.de/",
+      "truth_class": "operator_published",
+      "purposes": [
+        "operator_identity",
+        "reinforcement",
+        "demand_context"
+      ],
+      "prohibited_uses": [
+        "live_capacity",
+        "nodal_headroom"
+      ],
+      "quality": [
+        {
+          "source_id": "wesernetz_publications",
+          "intended_role": "operator_identity",
+          "authority": 5,
+          "geographic_specificity": 2,
+          "temporal_freshness": 4,
+          "electrical_specificity": 4,
+          "completeness": 3,
+          "reproducibility": 4,
+          "licence_clarity": 3,
+          "usable": true,
+          "limitations": [
+            "Not suitable for live_capacity.",
+            "Not suitable for nodal_headroom."
+          ],
+          "score": 71.4
+        },
+        {
+          "source_id": "wesernetz_publications",
+          "intended_role": "reinforcement",
+          "authority": 5,
+          "geographic_specificity": 2,
+          "temporal_freshness": 4,
+          "electrical_specificity": 4,
+          "completeness": 3,
+          "reproducibility": 4,
+          "licence_clarity": 3,
+          "usable": true,
+          "limitations": [
+            "Not suitable for live_capacity.",
+            "Not suitable for nodal_headroom."
+          ],
+          "score": 71.4
+        },
+        {
+          "source_id": "wesernetz_publications",
+          "intended_role": "demand_context",
+          "authority": 5,
+          "geographic_specificity": 2,
+          "temporal_freshness": 4,
+          "electrical_specificity": 4,
+          "completeness": 3,
+          "reproducibility": 4,
+          "licence_clarity": 3,
+          "usable": true,
+          "limitations": [
+            "Not suitable for live_capacity.",
+            "Not suitable for nodal_headroom."
+          ],
+          "score": 71.4
+        }
+      ]
+    },
+    {
+      "id": "edis_publications",
+      "publisher": "E.DIS Netz GmbH",
+      "url": "https://www.e-dis-netz.de/de/energie-anschliessen/netzinformationen.html",
+      "truth_class": "operator_published",
+      "purposes": [
+        "operator_identity",
+        "reinforcement",
+        "demand_context"
+      ],
+      "prohibited_uses": [
+        "live_capacity",
+        "nodal_headroom"
+      ],
+      "quality": [
+        {
+          "source_id": "edis_publications",
+          "intended_role": "operator_identity",
+          "authority": 5,
+          "geographic_specificity": 2,
+          "temporal_freshness": 4,
+          "electrical_specificity": 4,
+          "completeness": 3,
+          "reproducibility": 4,
+          "licence_clarity": 3,
+          "usable": true,
+          "limitations": [
+            "Not suitable for live_capacity.",
+            "Not suitable for nodal_headroom."
+          ],
+          "score": 71.4
+        },
+        {
+          "source_id": "edis_publications",
+          "intended_role": "reinforcement",
+          "authority": 5,
+          "geographic_specificity": 2,
+          "temporal_freshness": 4,
+          "electrical_specificity": 4,
+          "completeness": 3,
+          "reproducibility": 4,
+          "licence_clarity": 3,
+          "usable": true,
+          "limitations": [
+            "Not suitable for live_capacity.",
+            "Not suitable for nodal_headroom."
+          ],
+          "score": 71.4
+        },
+        {
+          "source_id": "edis_publications",
+          "intended_role": "demand_context",
+          "authority": 5,
+          "geographic_specificity": 2,
+          "temporal_freshness": 4,
+          "electrical_specificity": 4,
+          "completeness": 3,
+          "reproducibility": 4,
+          "licence_clarity": 3,
+          "usable": true,
+          "limitations": [
+            "Not suitable for live_capacity.",
+            "Not suitable for nodal_headroom."
+          ],
+          "score": 71.4
+        }
+      ]
+    }
+  ],
+  "sufficiency": [
+    {
+      "output": "constraint_screening",
+      "status": "conditionally_sufficient",
+      "present_inputs": [
+        "congestion_or_loading_evidence",
+        "temporal_coverage",
+        "topology_identity"
+      ],
+      "missing_inputs": [
+        "geographic_attribution"
+      ],
+      "conclusion": "Constraint signals may be reported only at their published resolution."
+    },
+    {
+      "output": "relative_node_ranking",
+      "status": "insufficient",
+      "present_inputs": [
+        "consistent_topology",
+        "voltage_equipment_context"
+      ],
+      "missing_inputs": [
+        "benchmark_validation",
+        "comparable_demand_estimates",
+        "scenario_sensitivity_testing"
+      ],
+      "conclusion": "Ranking remains experimental until benchmark and outcome validation pass."
+    },
+    {
+      "output": "capacity_bands",
+      "status": "insufficient",
+      "present_inputs": [
+        "generation_assumptions"
+      ],
+      "missing_inputs": [
+        "contracted_queued_demand",
+        "electrical_parameters",
+        "equipment_ratings",
+        "existing_demand",
+        "n_minus_one_policy",
+        "operator_validation_or_outcomes",
+        "switching_state"
+      ],
+      "conclusion": "Available MW cannot be published without every mandatory electrical and validation input."
+    }
+  ]
+}

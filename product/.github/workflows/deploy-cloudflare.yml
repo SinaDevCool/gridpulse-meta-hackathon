@@ -1,0 +1,91 @@
+name: Deploy GridPulse
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  validate:
+    uses: ./.github/workflows/validate-candidate.yml
+    with:
+      production: true
+    secrets:
+      VITE_SUPABASE_URL: ${{ secrets.VITE_SUPABASE_URL }}
+      VITE_SUPABASE_PUBLISHABLE_KEY: ${{ secrets.VITE_SUPABASE_PUBLISHABLE_KEY }}
+  publish:
+    needs: validate
+    if: ${{ github.ref == 'refs/heads/main' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    env:
+      GRIDPULSE_SMOKE_BROWSER_CHANNEL: chrome
+    concurrency:
+      group: gridpulse-production-publish
+      cancel-in-progress: false
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - name: Prepare production smoke-test browser
+        timeout-minutes: 2
+        run: |
+          google-chrome --version
+          node --input-type=module -e 'import { chromium } from "playwright"; const browser = await chromium.launch({channel: process.env.GRIDPULSE_SMOKE_BROWSER_CHANNEL, headless: true}); console.log(await browser.version()); await browser.close();'
+      - uses: actions/download-artifact@v4
+        with:
+          name: ${{ needs.validate.outputs.artifact }}
+          path: dist
+      - name: Verify exact candidate identity and contents
+        run: node scripts/candidate-artifact.mjs verify
+      - name: Validate packaged Worker without rebuilding
+        run: npx wrangler deploy --config dist/server/wrangler.json --dry-run
+      - run: node scripts/candidate-artifact.mjs verify
+      - name: Reject an obsolete production candidate
+        run: test "$(git ls-remote origin refs/heads/main | cut -f1)" = "$GITHUB_SHA"
+      - name: Configure production copilot server secrets
+        run: node scripts/configure-copilot-secret.mjs
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          META_API_KEY: ${{ secrets.META_API_KEY }}
+          COPILOT_PROVIDER: ${{ vars.COPILOT_PROVIDER }}
+          COPILOT_MODEL: ${{ vars.COPILOT_MODEL }}
+          COPILOT_FALLBACK_PROVIDER: ${{ vars.COPILOT_FALLBACK_PROVIDER }}
+          COPILOT_FALLBACK_MODEL: ${{ vars.COPILOT_FALLBACK_MODEL }}
+          COPILOT_ANALYTICS_URL: ${{ vars.OPERATIONS_MILP_API_URL }}
+      - name: Publish the validated artifact
+        run: npx wrangler deploy --config dist/server/wrangler.json
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+      - name: Verify production build identity
+        run: |
+          node --input-type=module -e 'let matched=false; for(let attempt=0;attempt<12;attempt++){const r=await fetch("https://gridpulseinsights.com/operations",{cache:"no-store"}); const html=await r.text(); if(r.ok && html.includes(`name="gridpulse-build" content="${process.env.GITHUB_SHA}"`)){matched=true;break;} await new Promise(resolve=>setTimeout(resolve,5000));} if(!matched) throw new Error("Live build does not match validated candidate after propagation window");'
+      - name: Verify production application
+        env:
+          GRIDPULSE_HEALTH_BASE_URL: https://gridpulseinsights.com
+          VITE_SUPABASE_URL: ${{ secrets.VITE_SUPABASE_URL }}
+          VITE_SUPABASE_PUBLISHABLE_KEY: ${{ secrets.VITE_SUPABASE_PUBLISHABLE_KEY }}
+        run: node scripts/check-production-health.mjs
+      - name: Verify production map rendering
+        env:
+          GRIDPULSE_HEALTH_BASE_URL: https://gridpulseinsights.com
+        run: node scripts/check-production-map.mjs
+      - name: Verify real public MILP and shared Operations result
+        if: vars.OPERATIONS_MILP_ENABLED == 'true' && vars.PUBLIC_MILP_ENABLED == 'true'
+        env:
+          GRIDPULSE_CHECK_COPILOT: 'true'
+          GRIDPULSE_EXPECT_COPILOT_PROVIDER: ${{ vars.COPILOT_PROVIDER || 'openai' }}
+        run: node scripts/check-production-milp.mjs
+      - uses: actions/upload-artifact@v4
+        if: ${{ always() }}
+        with:
+          name: production-smoke-failure-${{ github.run_attempt }}
+          path: test-results/production-*.png
+          if-no-files-found: ignore
+          retention-days: 7

@@ -1,0 +1,21 @@
+regions:
+  - id: DE-BE
+    name: Berlin
+    kind: bundesland
+    components: [Berlin]
+  - id: DE-BB
+    name: Brandenburg
+    kind: bundesland
+    components: [Brandenburg]
+  - id: DE-HB
+    name: Bremen
+    kind: bundesland
+    components: [Bremen, Bremerhaven]
+  - id: DE-HE-FRA
+    name: Frankfurt am Main
+    kind: municipality
+    components: [Frankfurt am Main]
+  - id: DE-RHEIN-MAIN
+    name: Rhine-Main
+    kind: functional_region
+    components: [Frankfurt am Main, Wiesbaden, Mainz, Darmstadt, Offenbach am Main]

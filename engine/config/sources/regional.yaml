@@ -1,0 +1,73 @@
+sources:
+  - id: dwd_open_data
+    publisher: Deutscher Wetterdienst
+    title: DWD Open Data
+    url: https://opendata.dwd.de/
+    format: html
+    authority: federal_agency
+    coverage: Germany
+    voltage_scope: []
+    purposes: [weather_history, weather_features]
+    prohibited_uses: [nodal_headroom, connection_feasibility]
+    truth_class: operator_published
+    enabled: true
+  - id: entsoe_transparency
+    publisher: ENTSO-E
+    title: ENTSO-E Transparency Platform
+    url: https://transparency.entsoe.eu/
+    format: html
+    authority: european_operator_platform
+    coverage: Germany and European bidding zones
+    voltage_scope: []
+    purposes: [load, generation, outages, congestion_context]
+    prohibited_uses: [distribution_nodal_headroom, connection_feasibility]
+    truth_class: operator_published
+    enabled: true
+  - id: tennet_transparency
+    publisher: TenneT TSO GmbH
+    title: TenneT German transparency information
+    url: https://www.tennet.eu/markets/transparency
+    format: html
+    authority: operator
+    coverage: TenneT Germany control area including relevant Bremen and Hessen context
+    voltage_scope: [380, 220]
+    purposes: [congestion, outages, upstream_stress]
+    prohibited_uses: [distribution_nodal_headroom, connection_feasibility]
+    truth_class: constraint_detected
+    enabled: true
+  - id: amprion_transparency
+    publisher: Amprion GmbH
+    title: Amprion transparency information
+    url: https://www.amprion.net/Grid-Data/
+    format: html
+    authority: operator
+    coverage: Amprion control area including relevant Rhine-Main context
+    voltage_scope: [380, 220]
+    purposes: [congestion, outages, upstream_stress]
+    prohibited_uses: [distribution_nodal_headroom, connection_feasibility]
+    truth_class: constraint_detected
+    enabled: true
+  - id: wesernetz_publications
+    publisher: wesernetz Bremen GmbH
+    title: wesernetz network publications
+    url: https://www.wesernetz.de/
+    format: html
+    authority: operator
+    coverage: Bremen and Bremerhaven distribution context
+    voltage_scope: [110, 20, 10]
+    purposes: [operator_identity, reinforcement, demand_context]
+    prohibited_uses: [live_capacity, nodal_headroom]
+    truth_class: operator_published
+    enabled: true
+  - id: edis_publications
+    publisher: E.DIS Netz GmbH
+    title: E.DIS network publications
+    url: https://www.e-dis-netz.de/de/energie-anschliessen/netzinformationen.html
+    format: html
+    authority: operator
+    coverage: Brandenburg distribution context
+    voltage_scope: [110, 20, 10]
+    purposes: [operator_identity, reinforcement, demand_context]
+    prohibited_uses: [live_capacity, nodal_headroom]
+    truth_class: operator_published
+    enabled: true

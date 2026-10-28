@@ -1,0 +1,46 @@
+schema_version: gridpulse-capacity-study-config-v1
+evidence_cutoff: "2026-01-02T00:00:00+00:00"
+decision_time: "2026-01-02T00:00:00+00:00"
+site:
+  site_id: simbench-bounded-data-centre
+  latitude: 52.5
+  longitude: 13.4
+  requested_capacity_mw: 5.0
+  operator_id: simbench
+network:
+  mode: simbench
+  code: 1-HV-urban--0-sw
+  connection_bus: bus-1
+pcc_hypotheses:
+  - pcc_id: simbench-bus-1-hypothesis
+    bus_id: bus-1
+    operator_id: simbench
+    voltage_kv: 110
+    status: reconstructed
+    confidence: 0.5
+operating_states:
+  mode: mock_operator
+  start: "2026-01-01T00:00:00+00:00"
+  hours: 1
+  seed: 42
+  peak_load_mw: 20.0
+  generation_capacity_mw: 5.0
+ensemble:
+  samples_per_pcc: 1
+  seed: 2026
+operator_data:
+  topology: false
+  ratings: false
+  loading: false
+  queue: false
+  contingencies: false
+incremental_load_power_factor: 0.97
+capacity_tolerance_mw: 2.0
+maximum_capacity_mw: 10.0
+planning:
+  conditional_capacity:
+    method: availability_level
+    availability: 0.95
+  operating_terms:
+    response_time_seconds: 900
+    maximum_event_duration_minutes: 60

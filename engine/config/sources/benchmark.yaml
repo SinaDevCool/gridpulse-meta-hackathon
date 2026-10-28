@@ -1,0 +1,13 @@
+sources:
+  - id: simbench_datasets
+    publisher: SimBench consortium
+    title: SimBench benchmark network datasets
+    url: https://simbench.de/en/download/datasets/
+    format: html
+    authority: research_benchmark
+    coverage: Synthetic German benchmark networks
+    voltage_scope: [380, 220, 110, 20, 10, 0.4]
+    purposes: [method_validation, sensitivity_testing]
+    prohibited_uses: [berlin_live_capacity]
+    truth_class: synthetic_demonstration
+    enabled: true

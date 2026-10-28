@@ -1,0 +1,3 @@
+[submodule ".render-core"]
+	path = .render-core
+	url = https://github.com/SinaDevCool/gridpulse.git

@@ -1,0 +1,79 @@
+name: Canonical optimiser qualification (no deployment)
+on:
+  push:
+    branches: [codex/facility-optimizer-qualification, codex/milp-quarter-hour]
+  pull_request:
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: optimizer-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  qualify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      OMP_NUM_THREADS: "1"
+      OPENBLAS_NUM_THREADS: "1"
+      MKL_NUM_THREADS: "1"
+      PYTHONHASHSEED: "0"
+    steps:
+      - uses: actions/checkout@v4
+      - name: Resolve API revision from release submodule
+        id: core
+        shell: bash
+        run: |
+          core_sha=$(git rev-parse HEAD:.render-core)
+          [[ "$core_sha" =~ ^[0-9a-f]{40}$ ]] || exit 1
+          echo "sha=$core_sha" >> "$GITHUB_OUTPUT"
+          echo "API revision: $core_sha" >> "$GITHUB_STEP_SUMMARY"
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Require private dependency access
+        env:
+          CORE_READ_TOKEN: ${{ secrets.GRIDPULSE_CORE_READ_TOKEN }}
+        run: test -n "$CORE_READ_TOKEN" || { echo "Configure GRIDPULSE_CORE_READ_TOKEN with read-only Contents access to SinaDevCool/gridpulse"; exit 1; }
+      - uses: actions/checkout@v4
+        with:
+          repository: SinaDevCool/gridpulse
+          ref: ${{ steps.core.outputs.sha }}
+          token: ${{ secrets.GRIDPULSE_CORE_READ_TOKEN }}
+          path: .dependencies/gridpulse
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Generate exact normal-button browser request
+        working-directory: .dependencies/gridpulse
+        env:
+          GRIDPULSE_MILP_REQUEST_OUTPUT: browser-milp-request.json
+        run: npm ci && npx vitest run src/features/operations/synthetic-milp-request.test.ts --maxWorkers=2
+      - name: Install pinned public contract dependency and private candidate
+        run: |
+          python -m pip install "./.dependencies/gridpulse/services/grid-data[api]"
+          python -m pip install -e ".[dev,study]"
+      - name: Fast transport, solver and battery regression gate
+        env:
+          GRIDPULSE_BROWSER_REQUEST: .dependencies/gridpulse/browser-milp-request.json
+          GRIDPULSE_BROWSER_JOB_OUTPUT: .dependencies/gridpulse/browser-milp-job.json
+        run: python -m pytest tests/test_browser_milp_request.py tests/test_application_facility.py tests/test_optimizer_solver_qualification.py tests/test_canonical_boundary_qualification.py tests/test_facility_http_integration.py -q -ra --junitxml=reports/optimizer-fast.xml
+      - name: Accept genuine quarter-hour solve through all three frontend projections
+        working-directory: .dependencies/gridpulse
+        env:
+          GRIDPULSE_MILP_JOB_INPUT: browser-milp-job.json
+        run: npx vitest run src/features/operations/synthetic-milp-request.test.ts --maxWorkers=2
+      - name: Physics-aware experiments and calibration gate
+        run: python -m pytest tests/test_common_plan.py tests/test_calibration_pipeline.py tests/test_checkpoint_optimizer.py tests/test_asset_only_recovery.py tests/test_facility_experiments.py tests/test_facility_accounting.py tests/test_data_center_measurements_observations.py tests/test_data_center_backtest_economics.py tests/test_physics_artifacts.py tests/test_data_center_calibration.py tests/test_workload_adapter_calibration.py tests/test_delivery_calibration_governance.py -q -ra --junitxml=reports/physics-aware.xml
+      - name: Full regression gate (slow external studies remain explicitly opt-in)
+        run: python -m pytest tests -q -ra --junitxml=reports/regression.xml
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: optimizer-qualification-${{ github.sha }}
+          path: |
+            reports/*.xml
+            reports/quarter-hour-*.json
+          if-no-files-found: warn
+          retention-days: 7

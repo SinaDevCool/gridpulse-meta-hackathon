@@ -1,0 +1,17 @@
+# syntax=docker/dockerfile:1
+# CI-only resource qualification. No credentials or production data enter this image.
+FROM python:3.12-slim
+ENV PYTHONDONTWRITEBYTECODE=1 PYTHONUNBUFFERED=1 OMP_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 MKL_NUM_THREADS=1
+WORKDIR /app
+COPY --from=core /services/grid-data /core
+COPY --from=core /browser-milp-request.json /app/browser-milp-request.json
+ENV GRIDPULSE_BROWSER_REQUEST=/app/browser-milp-request.json
+ENV GRIDPULSE_BENCHMARK_DIR=/reports
+COPY pyproject.toml ./
+COPY src ./src
+COPY tests ./tests
+COPY deployment/render/demo.py ./deployment/render/demo.py
+RUN pip install --no-cache-dir "/core[api]" ".[dev]" "numpy>=1.26,<2" "scipy>=1.11,<2" "scikit-learn>=1.5,<2"
+RUN useradd --create-home --uid 10001 qualification && mkdir /reports && chown qualification /reports
+USER qualification
+CMD ["python", "-m", "pytest", "tests/test_browser_milp_request.py", "tests/test_facility_http_integration.py", "tests/test_checkpoint_optimizer.py", "tests/test_render_synthetic_demo.py", "-q", "-ra", "-p", "no:cacheprovider", "--junitxml=/reports/render-free.xml"]

@@ -1,0 +1,37 @@
+schema_version: gridpulse-capacity-study-config-v1
+evidence_cutoff: "2026-08-26T00:00:00+02:00"
+site:
+  site_id: berlin-public-screening-reference
+  latitude: 52.500
+  longitude: 13.400
+  requested_capacity_mw: 40.0
+  operator_id: stromnetz-berlin
+network:
+  mode: canonical_json
+  path: "C:/Users/sinak/OneDrive/GridPulse Capacity Research Data/normalized/networks/50hertz/56c8d58506f83c4d50d217118f5996bc8b1ae6af67918d8d304d91a29ec77662/network.json"
+pcc_hypotheses:
+  - pcc_id: marzahn-380kv-public-hypothesis
+    bus_id: D8MZA_1
+    operator_id: 50hertz
+    voltage_kv: 400
+    status: reconstructed
+    confidence: 0.45
+operating_states:
+  mode: mock_operator
+  start: "2026-01-15T17:00:00+00:00"
+  hours: 1
+  seed: 2026
+  peak_load_mw: 200
+  generation_capacity_mw: 80
+ensemble:
+  samples_per_pcc: 1
+  seed: 2026
+operator_data:
+  topology: false
+  ratings: true
+  loading: false
+  queue: false
+  contingencies: false
+incremental_load_power_factor: 0.97
+capacity_tolerance_mw: 2.0
+maximum_capacity_mw: 100.0

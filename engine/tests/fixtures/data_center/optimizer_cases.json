@@ -1,0 +1,19 @@
+{
+  "schema_version": "gridpulse-facility-optimizer-cases-v1",
+  "truth_class": "synthetic_demonstration",
+  "capacity_claim": false,
+  "cases": [
+    {
+      "case_id": "bounded-four-hour-flexibility",
+      "event_intervals": [true, false, false, false],
+      "required_reduction_mw": 0.03,
+      "expected_status": "optimal"
+    },
+    {
+      "case_id": "infeasible-shortfall-diagnostic",
+      "event_intervals": [true, false, false, false],
+      "required_reduction_mw": 0.5,
+      "expected_status": "infeasible"
+    }
+  ]
+}

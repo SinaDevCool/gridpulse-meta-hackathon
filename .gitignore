@@ -1,0 +1,11 @@
+node_modules/
+.venv/
+.env
+.env.*
+!.env.example
+.dev.vars
+.codex-tmp/
+dist/
+test-results/
+__pycache__/
+.pytest_cache/

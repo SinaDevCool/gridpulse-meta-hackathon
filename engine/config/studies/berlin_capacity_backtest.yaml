@@ -1,0 +1,31 @@
+study_id: berlin-public-evidence-backtest-v1
+study_area: Berlin
+target_loads_mw: [10, 25, 50, 100, 200]
+scenarios:
+  - {id: annual_minimum, load_factor: 0.65, generation_factor: 1.0}
+  - {id: annual_median, load_factor: 0.85, generation_factor: 1.0}
+  - {id: winter_peak, load_factor: 1.0, generation_factor: 0.7}
+  - {id: summer_peak, load_factor: 0.9, generation_factor: 1.1}
+security_cases: [n_0, n_1]
+n_1_scope: graph_selected_cases_with_exhaustive_stratified_audit
+candidate_nodes: all_non_slack_berlin_synthetic_nodes
+benchmark_scope: deterministic_structurally_stratified_10_node_sample_all_scenarios
+routine_candidate_count: 10
+validation_design: leave_one_network_family_out
+network_families: 8
+topology_provider: auto_neo4j_compatible
+capacity_bands_mw: [10, 25, 50, 100]
+evaluation:
+  top_10_recall_minimum: 0.80
+  severe_overstatement_rate_maximum: 0.01
+  overstatement_rate_maximum: 0.05
+  interval_coverage_minimum: 0.90
+  severe_overstatement_mw: 10
+  mean_absolute_error_mw_maximum: 10
+  median_absolute_error_mw_maximum: 7.5
+  contingency_selector_recall_minimum: 0.95
+release_rules:
+  require_unseen_network_validation: true
+  require_operator_validation_for_berlin_mw: true
+  abstain_on_unresolved_identity: true
+  abstain_on_missing_electrical_inputs: true

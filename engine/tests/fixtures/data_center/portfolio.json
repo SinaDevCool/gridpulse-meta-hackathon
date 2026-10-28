@@ -1,0 +1,11 @@
+{
+  "schema_version": "gridpulse-workload-portfolio-v1",
+  "portfolio_id": "synthetic-portfolio-a",
+  "truth_class": "synthetic_demonstration",
+  "interval_minutes": 15,
+  "workloads": [
+    {"workload_id": "critical-1", "kind": "critical_inference", "gpu_count": 8},
+    {"workload_id": "training-1", "kind": "training", "gpu_count": 8},
+    {"workload_id": "batch-1", "kind": "batch_inference", "gpu_count": 4}
+  ]
+}

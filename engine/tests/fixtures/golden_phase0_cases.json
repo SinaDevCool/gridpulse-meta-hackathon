@@ -1,0 +1,44 @@
+{
+  "schema_version": "gridpulse-golden-conformance-v1",
+  "cases": [
+    {
+      "id": "unconstrained",
+      "demand_mw": [40.0, 42.0, 41.0],
+      "n0_mw": [100.0, 100.0, 100.0],
+      "n1_mw": [80.0, 80.0, 80.0],
+      "expected_safe": true,
+      "expected_binding": null
+    },
+    {
+      "id": "thermal_constraint",
+      "demand_mw": [40.0, 75.0, 40.0],
+      "n0_mw": [100.0, 70.0, 100.0],
+      "n1_mw": [80.0, 65.0, 80.0],
+      "expected_safe": false,
+      "expected_binding": "line-thermal"
+    },
+    {
+      "id": "n1_binding",
+      "demand_mw": [55.0, 55.0, 55.0],
+      "n0_mw": [80.0, 80.0, 80.0],
+      "n1_mw": [50.0, 50.0, 50.0],
+      "expected_safe": false,
+      "expected_binding": "n-1-security"
+    },
+    {
+      "id": "energy_limited_battery",
+      "demand_mw": [60.0, 60.0, 60.0],
+      "n0_mw": [80.0, 80.0, 80.0],
+      "n1_mw": [50.0, 50.0, 50.0],
+      "battery_power_mw": 10.0,
+      "battery_energy_mwh": 15.0,
+      "expected_unserved_mwh": 15.0
+    },
+    {
+      "id": "stale_evidence_rejected",
+      "evidence_cutoff": "2026-01-01T00:00:00+00:00",
+      "retrieved_at": "2026-01-02T00:00:00+00:00",
+      "expected_error": "newer than its cutoff"
+    }
+  ]
+}

@@ -1,0 +1,49 @@
+schema_version: gridpulse-capacity-study-config-v1
+evidence_cutoff: "2026-01-02T00:00:00+00:00"
+decision_time: "2026-01-02T00:00:00+00:00"
+site:
+  site_id: berlin-demo-data-centre
+  latitude: 52.500
+  longitude: 13.400
+  requested_capacity_mw: 40.0
+  operator_id: stromnetz-berlin
+network:
+  mode: mock_berlin
+operating_states:
+  mode: mock_operator
+  start: "2026-01-01T00:00:00+00:00"
+  hours: 4
+  seed: 42
+  peak_load_mw: 200.0
+  generation_capacity_mw: 80.0
+maximum_pcc_candidates: 1
+minimum_voltage_kv: 110.0
+ensemble:
+  samples_per_pcc: 1
+  seed: 2026
+  load_scale_bounds: [0.9, 1.1]
+  branch_rating_scale_bounds: [0.85, 1.05]
+  transformer_rating_scale_bounds: [0.85, 1.05]
+operator_data:
+  topology: false
+  ratings: false
+  loading: false
+  queue: false
+  contingencies: false
+incremental_load_power_factor: 0.97
+capacity_tolerance_mw: 1.0
+maximum_capacity_mw: 250.0
+planning:
+  conditional_capacity:
+    method: availability_level
+    availability: 0.95
+  operating_terms:
+    response_time_seconds: 900
+    maximum_event_duration_minutes: 240
+    maximum_events_per_day: 2
+    maximum_events_per_year: 100
+    maximum_annual_event_hours: 120.0
+    minimum_notice_minutes: 15
+    recovery_ramp_mw_per_minute: 1.0
+    rebound_limit_mw: 5.0
+    reactive_power_requirement: "Maintain the configured 0.97 import power factor."

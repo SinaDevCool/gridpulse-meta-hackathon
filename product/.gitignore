@@ -1,0 +1,69 @@
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+node_modules
+dist
+dist-ssr
+.output
+.vinxi
+.tanstack/**
+.nitro
+*.local
+
+# Environment files are local/deployment configuration. Only the documented
+# placeholder template may be committed.
+.env
+.env.*
+!.env.example
+
+# Wrangler / Cloudflare
+.wrangler/
+.dev.vars
+supabase/.temp/
+
+# Browser-test artifacts
+test-results/
+playwright-report/
+
+# Codex-local attachments and generated working artifacts
+/.codex-remote-attachments/
+/.codex_artifacts/
+/.codex-tmp/
+/tmp/
+/video-assets/
+
+# Python geospatial service
+__pycache__/
+*.py[cod]
+*.egg-info/
+services/grid-data/build/
+.pytest_cache/
+.ruff_cache/
+
+# Local Worker diagnostics
+*.cpuprofile
+
+# Private Release 2 model and benchmark artifacts (never ship in the public bundle)
+output/models/
+output/release2-private-benchmark.json
+output/release3-private-shadow.json
+
+# Editor directories and files
+.claude/
+.vscode/*
+!.vscode/extensions.json
+.idea
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+/tmp/migration-fetch/
+/tmp/migration-history.sql

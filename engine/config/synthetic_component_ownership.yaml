@@ -1,0 +1,239 @@
+schema_version: synthetic-component-ownership-v4
+repository_boundary:
+  dependency_order:
+    - gridpulse-grid-core
+    - gridpulse-capacity-backtest
+    - production-analytics-service
+    - production-web-ui
+  production_integration: docs/production-integration-boundary.md
+  grid_core_distribution: gridpulse-grid-core
+  forbidden_dependencies:
+    grid_core:
+      - capacity_backtest
+      - fastapi
+      - supabase
+    analytical_engine:
+      - grid_data.api
+    web_ui:
+      - analytical_reimplementation
+components:
+  topology_and_ratings:
+    authority: external:gridpulse-grid-core/grid_data/berlin_synthetic_capacity.py
+    callable: build_berlin_synthetic_model
+  network_families:
+    authority: src/capacity_backtest/backtest.py
+    callable: synthetic_network_families
+  ac_power_flow:
+    authority: external:gridpulse-grid-core/grid_data/network_study.py
+    callable: PandapowerProvider
+  contingency_selection:
+    authority: src/capacity_backtest/contingency_v4.py
+    callable: select_contingencies_v4
+  flexibility_dispatch:
+    authority: external:gridpulse-grid-core/grid_data/deflex.py
+    callable: dispatch_flexibility
+  optimized_flexibility_dispatch:
+    authority: src/capacity_backtest/optimized_deflex.py
+    callable: optimize_flexibility
+  queue_backtest:
+    authority: src/capacity_backtest/queue_backtest.py
+    callable: run_queue_backtest
+  operator_reconciliation:
+    authority: src/capacity_backtest/operator_reconciliation.py
+    callable: reconcile_connection_outcomes
+  event_revisions:
+    authority: src/capacity_backtest/events.py
+    callable: GridEvent
+  truth_classes:
+    authority: src/capacity_backtest/contracts.py
+    callable: TruthClass
+  output_layers:
+    authority: src/capacity_backtest/gridcare_outputs.py
+    callable: GridCareOutput
+  durable_storage:
+    authority: src/capacity_backtest/storage.py
+    callable: resolve_storage
+  canonical_study_pipeline:
+    authority: src/capacity_backtest/pipeline.py
+    callable: StudyPipeline
+  canonical_capacity_contracts:
+    authority: src/capacity_backtest/capacity_study/contracts.py
+    callable: CapacityStatistics
+  pcc_hypotheses:
+    authority: src/capacity_backtest/capacity_study/pcc.py
+    callable: generate_pcc_hypotheses
+  operating_state_assembly:
+    authority: src/capacity_backtest/capacity_study/operating_states.py
+    callable: assemble_operating_states
+  network_uncertainty_ensemble:
+    authority: src/capacity_backtest/capacity_study/ensemble.py
+    callable: build_network_ensemble
+  exhaustive_n_minus_one:
+    authority: src/capacity_backtest/capacity_study/contingencies.py
+    callable: exhaustive_n_minus_one
+  capacity_aggregation:
+    authority: src/capacity_backtest/capacity_study/aggregation.py
+    callable: aggregate_capacity
+  capacity_run:
+    authority: src/capacity_backtest/capacity_study/runner.py
+    callable: run_capacity_study
+  mastr_capture_and_normalization:
+    authority: src/capacity_backtest/capacity_study/mastr_assets.py
+    callable: normalize_mastr_archive
+  annual_chronology:
+    authority: src/capacity_backtest/capacity_study/chronology.py
+    callable: build_50hertz_chronology
+  reconstruction_calibration:
+    authority: src/capacity_backtest/capacity_study/reconstruction.py
+    callable: reconstruct_network_ensemble
+  hidden_network_validation:
+    authority: src/capacity_backtest/capacity_study/simbench_validation.py
+    callable: validate_simbench_reconstruction
+  capacity_readiness:
+    authority: src/capacity_backtest/capacity_study/readiness.py
+    callable: assess_capacity_readiness
+  annual_chunk_execution:
+    authority: src/capacity_backtest/capacity_study/annual.py
+    callable: execute_resumable
+  capacity_flexibility_adapter:
+    authority: src/capacity_backtest/capacity_study/flexibility.py
+    callable: assess_dependable_flexibility
+  operator_enquiry_package:
+    authority: src/capacity_backtest/capacity_study/enquiry.py
+    callable: build_enquiry_package
+  flexibility_requirement_contract:
+    authority: src/capacity_backtest/domain/flexibility_requirement.py
+    callable: FlexibilityRequirement
+  flexibility_requirement_builder:
+    authority: src/capacity_backtest/capacity_study/flexibility_requirement.py
+    callable: build_flexibility_requirement
+  data_center_contracts:
+    authority: src/capacity_backtest/data_center/contracts.py
+    callable: AIWorkload
+  data_center_power_profiles:
+    authority: src/capacity_backtest/data_center/power_profiles.py
+    callable: PiecewiseLinearPowerProfile
+  data_center_workload_simulation:
+    authority: src/capacity_backtest/data_center/workloads.py
+    callable: simulate_workload
+  data_center_portfolio_evaluation:
+    authority: src/capacity_backtest/data_center/portfolio.py
+    callable: evaluate_portfolio
+  data_center_facility_balance:
+    authority: src/capacity_backtest/data_center/facility.py
+    callable: build_facility_trajectory
+  data_center_phase2_adapter:
+    authority: src/capacity_backtest/data_center/phase2_adapter.py
+    callable: map_portfolio_to_phase2
+  data_center_flexibility_assessment:
+    authority: src/capacity_backtest/data_center/assessment.py
+    callable: assess_facility_flexibility
+  data_center_facility_optimization:
+    authority: src/capacity_backtest/data_center/optimizer.py
+    callable: optimize_facility_flexibility
+  battery_temperature_capability:
+    authority: src/capacity_backtest/phase2/battery.py
+    callable: available_battery_power_mw
+  uncertainty_aware_flexibility:
+    authority: src/capacity_backtest/data_center/uncertainty.py
+    callable: evaluate_uncertain_flexibility
+  facility_historical_backtest:
+    authority: src/capacity_backtest/data_center/backtest.py
+    callable: run_historical_backtest
+  facility_economic_accounting:
+    authority: src/capacity_backtest/data_center/economics.py
+    callable: calculate_economics
+  market_product_contracts:
+    authority: src/capacity_backtest/market/contracts.py
+    callable: MarketProduct
+  market_product_eligibility:
+    authority: src/capacity_backtest/market/eligibility.py
+    callable: assess_market_eligibility
+  market_settlement:
+    authority: src/capacity_backtest/market/settlement.py
+    callable: settle_delivery
+  market_application_boundary:
+    authority: src/capacity_backtest/application/market.py
+    callable: run_market_qualification
+  rolling_facility_planning:
+    authority: src/capacity_backtest/data_center/rolling_planner.py
+    callable: run_rolling_planner
+  rolling_planning_application_boundary:
+    authority: src/capacity_backtest/application/rolling.py
+    callable: run_rolling_facility_plan
+  shadow_facility_replay:
+    authority: src/capacity_backtest/data_center/shadow.py
+    callable: run_shadow_replay
+  data_center_delivery_verification:
+    authority: src/capacity_backtest/data_center/verification.py
+    callable: build_verification_summary
+  data_center_enquiry_package:
+    authority: src/capacity_backtest/data_center/reporting.py
+    callable: build_data_center_enquiry_package
+  read_only_adapter_capture:
+    authority: src/capacity_backtest/adapters/capture.py
+    callable: capture_read_only_payload
+  price_observation_adapter:
+    authority: src/capacity_backtest/adapters/price.py
+    callable: parse_price_csv
+  pcc_telemetry_adapter:
+    authority: src/capacity_backtest/adapters/telemetry.py
+    callable: parse_pcc_measurements
+  facility_measurement_boundaries:
+    authority: src/capacity_backtest/data_center/measurement_boundaries.py
+    callable: FacilityEnergyBoundary
+  facility_observation_alignment:
+    authority: src/capacity_backtest/data_center/observations.py
+    callable: align_observations
+  workload_execution_adapter:
+    authority: src/capacity_backtest/adapters/workload.py
+    callable: parse_workload_executions
+  component_telemetry_adapter:
+    authority: src/capacity_backtest/adapters/component.py
+    callable: parse_component_observations
+  workload_profile_calibration:
+    authority: src/capacity_backtest/data_center/profile_calibration.py
+    callable: calibrate_power_profile
+  facility_model_calibration:
+    authority: src/capacity_backtest/data_center/calibration.py
+    callable: validate_facility_calibration
+  bounded_facility_planner:
+    authority: src/capacity_backtest/data_center/planner.py
+    callable: plan_facility_with_fallback
+  adapter_read_only_safety:
+    authority: src/capacity_backtest/adapters/safety.py
+    callable: assess_adapter_safety
+  component_telemetry_quality:
+    authority: src/capacity_backtest/data_center/telemetry_quality.py
+    callable: assess_component_telemetry
+  shadow_divergence_monitor:
+    authority: src/capacity_backtest/data_center/shadow_monitor.py
+    callable: assess_shadow_divergence
+  complete_delivery_assessment:
+    authority: src/capacity_backtest/data_center/delivery_assessment.py
+    callable: verify_complete_delivery
+  calibration_change_governance:
+    authority: src/capacity_backtest/data_center/calibration_registry.py
+    callable: CalibrationRegistry
+  shadow_operations_reporting:
+    authority: src/capacity_backtest/data_center/shadow_reporting.py
+    callable: build_shadow_operations_snapshot
+  shadow_security_readiness:
+    authority: src/capacity_backtest/data_center/security_readiness.py
+    callable: assess_shadow_security
+  pilot_data_readiness:
+    authority: src/capacity_backtest/data_center/data_readiness.py
+    callable: assess_pilot_data_readiness
+non_authoritative_demonstrations:
+  - external:gridpulse-grid-core/grid_data/synthetic_capacity.py
+  - external:gridpulse-grid-core/grid_data/fifty_hertz_synthetic_capacity.py
+  - external:gridpulse-grid-core/grid_data/fifty_hertz_regional_screening.py
+  - src/capacity_backtest/hourly_ac.py
+  - src/capacity_backtest/flex_study.py
+  - src/capacity_backtest/synthetic_operator.py
+rules:
+  - New milestones must consume the listed authority instead of reimplementing its calculation.
+  - Synthetic evidence can never be promoted to an operator truth class.
+  - Large generated tables belong in OneDrive, not Git.
+  - Dependencies must follow repository_boundary.dependency_order without cycles.
+  - Production adapters translate canonical contracts and never reproduce calculations.

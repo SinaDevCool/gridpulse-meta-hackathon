@@ -1,0 +1,29 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "gridpulse-insights",
+  "compatibility_date": "2026-07-18",
+  "compatibility_flags": ["nodejs_compat"],
+  "main": "src/server.ts",
+  "assets": { "binding": "ASSETS" },
+  "vars": {
+    "PUBLIC_FINDER_EXPERIMENTAL_MODE": "false",
+  },
+  "ratelimits": [
+    {
+      "name": "COPILOT_RATE_LIMITER",
+      "namespace_id": "1003",
+      "simple": { "limit": 2, "period": 60 },
+    },
+    {
+      "name": "PUBLIC_FINDER_RATE_LIMITER",
+      "namespace_id": "1001",
+      "simple": { "limit": 600, "period": 60 },
+    },
+    {
+      "name": "OPERATIONS_RATE_LIMITER",
+      "namespace_id": "1002",
+      "simple": { "limit": 600, "period": 60 },
+    },
+  ],
+  "observability": { "enabled": true },
+}

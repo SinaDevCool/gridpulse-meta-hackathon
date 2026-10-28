@@ -1,0 +1,13 @@
+{
+  "facility_id": "synthetic-facility-a",
+  "site_id": "site-a",
+  "import_limit_mw": 1.0,
+  "cooling_baseline_mw": 0.02,
+  "cooling_load_factor": 0.2,
+  "networking_power_mw": 0.01,
+  "storage_power_mw": 0.01,
+  "fixed_auxiliary_power_mw": 0.01,
+  "ups_loss_fraction": 0.05,
+  "distribution_loss_fraction": 0.05,
+  "truth_class": "synthetic_demonstration"
+}

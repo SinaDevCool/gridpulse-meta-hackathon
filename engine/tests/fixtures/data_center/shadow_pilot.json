@@ -1,0 +1,16 @@
+{
+  "schema_version": "gridpulse-shadow-pilot-fixture-v1",
+  "truth_class": "synthetic_demonstration",
+  "capacity_claim": false,
+  "automatic_live_dispatch_authorized": false,
+  "resolution_minutes": 15,
+  "required_datasets": [
+    "pcc_active_reactive",
+    "it_power",
+    "cooling_power",
+    "auxiliary_power",
+    "workload_execution",
+    "ambient_temperature",
+    "equipment_availability"
+  ]
+}

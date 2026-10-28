@@ -1,0 +1,74 @@
+sources:
+  - id: dwd_hourly_climate
+    publisher: Deutscher Wetterdienst Climate Data Center
+    title: Quality-controlled historical hourly station observations
+    url: https://opendata.dwd.de/climate_environment/CDC/observations_germany/climate/hourly/
+    format: zip_csv
+    authority: federal_weather_service
+    coverage: Germany station network
+    voltage_scope: []
+    purposes: [weather_context, load_forecasting]
+    prohibited_uses: [grid_capacity, grid_feasibility]
+    truth_class: operator_published
+    enabled: true
+  - id: entsoe_outage_api
+    publisher: ENTSO-E Transparency Platform
+    title: Published generation and transmission unavailability documents
+    url: https://transparency.entsoe.eu/content/static_content/download?path=%2FStatic%20content%2Fweb%20api%2FIG-for-TP-data-extraction-process.pdf
+    format: api_xml
+    authority: european_tso_platform
+    coverage: published bidding-zone and infrastructure outage notices
+    voltage_scope: []
+    purposes: [outage_context, stress_forecasting]
+    prohibited_uses: [substation_headroom, unreported_outage_inference]
+    truth_class: operator_published
+    enabled: false
+    disabled_reason: Publication-time revision reconstruction and stable asset identity are not yet validated; absence must not be interpreted as zero outages.
+  - id: fifty_hertz_congestion
+    publisher: 50Hertz Transmission GmbH
+    title: Congestion management transparency
+    url: https://www.50hertz.com/de/Transparenz/Kennzahlen/Engpassmanagement
+    format: html
+    authority: operator
+    coverage: 50Hertz control area
+    voltage_scope: [380, 220]
+    purposes: [congestion, upstream_stress]
+    prohibited_uses: [distribution_nodal_headroom]
+    truth_class: constraint_detected
+    enabled: true
+  - id: smard_download_center
+    publisher: Bundesnetzagentur
+    title: SMARD electricity market data download centre
+    url: https://www.smard.de/home/downloadcenter
+    format: html
+    authority: regulator
+    coverage: Germany and bidding zones
+    voltage_scope: []
+    purposes: [system_demand, scenario_context]
+    prohibited_uses: [substation_loading, nodal_headroom]
+    truth_class: operator_published
+    enabled: true
+  - id: vnbdigital_network_plans
+    publisher: VNBdigital
+    title: Distribution network development plans
+    url: https://www.vnbdigital.de/
+    format: html
+    authority: operator_portal
+    coverage: Germany
+    voltage_scope: [110, 20, 10]
+    purposes: [reinforcement, demand_development]
+    prohibited_uses: [live_capacity]
+    truth_class: planned_reinforcement
+    enabled: true
+  - id: geofabrik_germany
+    publisher: Geofabrik GmbH / OpenStreetMap contributors
+    title: Germany OpenStreetMap extracts
+    url: https://download.geofabrik.de/europe/germany.html
+    format: html
+    authority: public_mapping
+    coverage: Germany
+    voltage_scope: []
+    purposes: [geospatial_crosswalk, topology_hypothesis]
+    prohibited_uses: [capacity, feasibility, official_coordinates]
+    truth_class: public_screening
+    enabled: true

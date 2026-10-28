@@ -1,0 +1,520 @@
+{
+  "generated_at": "2026-08-14T01:25:29.020319+00:00",
+  "context_area": "Germany-Luxembourg bidding zone",
+  "requested_regions": [
+    "DE-BE",
+    "DE-BB",
+    "DE-HB",
+    "DE-HE-FRA",
+    "DE-RHEIN-MAIN"
+  ],
+  "regional_measurement": false,
+  "training_rows": 34893,
+  "held_out_year": 2025,
+  "held_out_rows": 8760,
+  "models": {
+    "ridge_load_lags_only": {
+      "status": "succeeded",
+      "metrics": {
+        "mae": 1335.9683244001878,
+        "rmse": 1735.169834782201
+      },
+      "limitations": [
+        "Ablation baseline excludes generation lags."
+      ]
+    },
+    "mean_baseline": {
+      "status": "succeeded",
+      "metrics": {
+        "mae": 7796.224095822677,
+        "rmse": 9325.775035970864
+      },
+      "limitations": []
+    },
+    "ridge": {
+      "status": "succeeded",
+      "metrics": {
+        "mae": 1296.7868336524837,
+        "rmse": 1696.721464811699
+      },
+      "limitations": []
+    },
+    "tabpfn": {
+      "status": "succeeded",
+      "metrics": {
+        "mae": 452.41928851812224,
+        "rmse": 600.4197357700148
+      },
+      "limitations": [
+        "Inputs were processed by the Prior Labs managed service."
+      ]
+    }
+  },
+  "features": [
+    "hour",
+    "weekday",
+    "month",
+    "load_lag_1h",
+    "load_lag_24h",
+    "load_lag_168h",
+    "wind_lag_1h",
+    "wind_lag_24h",
+    "wind_lag_168h",
+    "solar_lag_1h",
+    "solar_lag_24h",
+    "solar_lag_168h",
+    "temperature_lag_1h",
+    "temperature_lag_24h",
+    "temperature_lag_168h"
+  ],
+  "load_profile_summary": {
+    "artifact_count": 5,
+    "accepted_count": 5,
+    "series_count": 5,
+    "point_count": 175296,
+    "duplicate_points": 0,
+    "missing_intervals": 0,
+    "units": [
+      "MAW"
+    ],
+    "resolutions": [
+      "PT15M"
+    ],
+    "business_types": [
+      "A04"
+    ],
+    "directions": [
+      "consumption"
+    ],
+    "artifacts": [
+      "data\\raw\\entsoe-live\\2021\\A65\\b1d917a8cfcd\\response.xml",
+      "data\\raw\\entsoe-live\\2022\\A65\\14db6f0dbcb0\\response.xml",
+      "data\\raw\\entsoe-live\\2023\\A65\\36a938da4a40\\response.xml",
+      "data\\raw\\entsoe-live\\2024\\A65\\b2598e2bd8e6\\response.xml",
+      "data\\raw\\entsoe-live\\2025\\A65\\5de5809adc14\\response.xml"
+    ]
+  },
+  "generation_profile_summary": {
+    "artifact_count": 60,
+    "accepted_count": 60,
+    "series_count": 1136,
+    "point_count": 2835837,
+    "duplicate_points": 0,
+    "missing_intervals": 0,
+    "units": [
+      "MAW"
+    ],
+    "resolutions": [
+      "PT15M"
+    ],
+    "business_types": [
+      "A01"
+    ],
+    "directions": [
+      "consumption",
+      "generation"
+    ],
+    "artifacts": [
+      "data\\raw\\entsoe-live\\2021\\A75\\2014fe65f93a\\response.xml",
+      "data\\raw\\entsoe-live\\2021\\A75\\2019c5020359\\response.xml",
+      "data\\raw\\entsoe-live\\2021\\A75\\4297d0ebb4f5\\response.xml",
+      "data\\raw\\entsoe-live\\2021\\A75\\5c6eae5dd6cc\\response.xml",
+      "data\\raw\\entsoe-live\\2021\\A75\\66577fa47c5a\\response.xml",
+      "data\\raw\\entsoe-live\\2021\\A75\\8b69e956c730\\response.xml",
+      "data\\raw\\entsoe-live\\2021\\A75\\9a3ed65ea2e0\\response.xml",
+      "data\\raw\\entsoe-live\\2021\\A75\\b51e5ce6aac8\\response.xml",
+      "data\\raw\\entsoe-live\\2021\\A75\\cb5e46ae39f6\\response.xml",
+      "data\\raw\\entsoe-live\\2021\\A75\\d068de28910f\\response.xml",
+      "data\\raw\\entsoe-live\\2021\\A75\\dc9a23560407\\response.xml",
+      "data\\raw\\entsoe-live\\2021\\A75\\f7802246058f\\response.xml",
+      "data\\raw\\entsoe-live\\2022\\A75\\0305033b0780\\response.xml",
+      "data\\raw\\entsoe-live\\2022\\A75\\0c5d5d2253a6\\response.xml",
+      "data\\raw\\entsoe-live\\2022\\A75\\169d3c96bc0d\\response.xml",
+      "data\\raw\\entsoe-live\\2022\\A75\\16c8116fd62f\\response.xml",
+      "data\\raw\\entsoe-live\\2022\\A75\\2b9edc3368c4\\response.xml",
+      "data\\raw\\entsoe-live\\2022\\A75\\613195a3eae3\\response.xml",
+      "data\\raw\\entsoe-live\\2022\\A75\\874fe528317a\\response.xml",
+      "data\\raw\\entsoe-live\\2022\\A75\\a012f557e9c1\\response.xml",
+      "data\\raw\\entsoe-live\\2022\\A75\\ad2f6d09c973\\response.xml",
+      "data\\raw\\entsoe-live\\2022\\A75\\e8147225d3ef\\response.xml",
+      "data\\raw\\entsoe-live\\2022\\A75\\ed3cea411b0d\\response.xml",
+      "data\\raw\\entsoe-live\\2022\\A75\\fc1433d45be6\\response.xml",
+      "data\\raw\\entsoe-live\\2023\\A75\\0810b0c750ca\\response.xml",
+      "data\\raw\\entsoe-live\\2023\\A75\\2a3c38064804\\response.xml",
+      "data\\raw\\entsoe-live\\2023\\A75\\2dcccca1f390\\response.xml",
+      "data\\raw\\entsoe-live\\2023\\A75\\3930d6c7e747\\response.xml",
+      "data\\raw\\entsoe-live\\2023\\A75\\4491c827f9ed\\response.xml",
+      "data\\raw\\entsoe-live\\2023\\A75\\598908003f7f\\response.xml",
+      "data\\raw\\entsoe-live\\2023\\A75\\aa4d3ac95aac\\response.xml",
+      "data\\raw\\entsoe-live\\2023\\A75\\ab3fc0c87bd7\\response.xml",
+      "data\\raw\\entsoe-live\\2023\\A75\\bb55f1c12fff\\response.xml",
+      "data\\raw\\entsoe-live\\2023\\A75\\bd70c074f14a\\response.xml",
+      "data\\raw\\entsoe-live\\2023\\A75\\d35109a5546a\\response.xml",
+      "data\\raw\\entsoe-live\\2023\\A75\\e4da758c8b8c\\response.xml",
+      "data\\raw\\entsoe-live\\2024\\A75\\0a2a977c908e\\response.xml",
+      "data\\raw\\entsoe-live\\2024\\A75\\27dd7e49e3e7\\response.xml",
+      "data\\raw\\entsoe-live\\2024\\A75\\3012fdae65d0\\response.xml",
+      "data\\raw\\entsoe-live\\2024\\A75\\38b23da813a7\\response.xml",
+      "data\\raw\\entsoe-live\\2024\\A75\\43dda9b97139\\response.xml",
+      "data\\raw\\entsoe-live\\2024\\A75\\53e65b711c91\\response.xml",
+      "data\\raw\\entsoe-live\\2024\\A75\\7b1b2ead5455\\response.xml",
+      "data\\raw\\entsoe-live\\2024\\A75\\820c8cbcddbc\\response.xml",
+      "data\\raw\\entsoe-live\\2024\\A75\\91001a96b3b0\\response.xml",
+      "data\\raw\\entsoe-live\\2024\\A75\\ab952b94545f\\response.xml",
+      "data\\raw\\entsoe-live\\2024\\A75\\bdbb15584b5a\\response.xml",
+      "data\\raw\\entsoe-live\\2024\\A75\\d7c102a75e6e\\response.xml",
+      "data\\raw\\entsoe-live\\2025\\A75\\07d0bd6d3d40\\response.xml",
+      "data\\raw\\entsoe-live\\2025\\A75\\12f3592deaea\\response.xml",
+      "data\\raw\\entsoe-live\\2025\\A75\\4f0d366bd403\\response.xml",
+      "data\\raw\\entsoe-live\\2025\\A75\\50598cb3093c\\response.xml",
+      "data\\raw\\entsoe-live\\2025\\A75\\7330ae6bea68\\response.xml",
+      "data\\raw\\entsoe-live\\2025\\A75\\7825b53ac1dc\\response.xml",
+      "data\\raw\\entsoe-live\\2025\\A75\\9a07874663ce\\response.xml",
+      "data\\raw\\entsoe-live\\2025\\A75\\ce14ed955180\\response.xml",
+      "data\\raw\\entsoe-live\\2025\\A75\\d15db1d79fc0\\response.xml",
+      "data\\raw\\entsoe-live\\2025\\A75\\e49c412980fb\\response.xml",
+      "data\\raw\\entsoe-live\\2025\\A75\\e6f3c0cda3b0\\response.xml",
+      "data\\raw\\entsoe-live\\2025\\A75\\ec9312c5f7a3\\response.xml"
+    ]
+  },
+  "generation_feature_boundary": "wind and solar observations enter only through past lags",
+  "rolling_origin_ridge": [
+    {
+      "test_year": 2022,
+      "training_rows": 8589,
+      "test_rows": 8760,
+      "mae_mw": 1220.8845070763027,
+      "rmse_mw": 1627.7623800400759
+    },
+    {
+      "test_year": 2023,
+      "training_rows": 17349,
+      "test_rows": 8760,
+      "mae_mw": 1232.9644629247575,
+      "rmse_mw": 1650.398539378408
+    },
+    {
+      "test_year": 2024,
+      "training_rows": 26109,
+      "test_rows": 8784,
+      "mae_mw": 1261.2221441429926,
+      "rmse_mw": 1661.683603408343
+    },
+    {
+      "test_year": 2025,
+      "training_rows": 34893,
+      "test_rows": 8760,
+      "mae_mw": 1296.7868336524837,
+      "rmse_mw": 1696.721464811699
+    }
+  ],
+  "rolling_stress_classifier": [
+    {
+      "test_year": 2022,
+      "training_threshold_mw": 73400.865,
+      "brier_score": 0.013382220849062525,
+      "precision": 0.6635294117647059,
+      "recall": 0.9494949494949495,
+      "false_negative_rate": 0.050505050505050504,
+      "calibration_bins": [
+        {
+          "mean_probability": 0.0023434799013681384,
+          "observed_rate": 0.00048661800486618007,
+          "count": 8220
+        },
+        {
+          "mean_probability": 0.2852405393603672,
+          "observed_rate": 0.05128205128205128,
+          "count": 78
+        },
+        {
+          "mean_probability": 0.4939995202671099,
+          "observed_rate": 0.1791044776119403,
+          "count": 67
+        },
+        {
+          "mean_probability": 0.7120644077892148,
+          "observed_rate": 0.3442622950819672,
+          "count": 61
+        },
+        {
+          "mean_probability": 0.9547488881253221,
+          "observed_rate": 0.7664670658682635,
+          "count": 334
+        }
+      ],
+      "truth_class": "derived_public_context",
+      "capacity_claim": false
+    },
+    {
+      "test_year": 2023,
+      "training_threshold_mw": 72805.95249999998,
+      "brier_score": 0.008559027091436586,
+      "precision": 0.16666666666666666,
+      "recall": 1.0,
+      "false_negative_rate": 0.0,
+      "calibration_bins": [
+        {
+          "mean_probability": 0.0021758309547872975,
+          "observed_rate": 0.0,
+          "count": 8556
+        },
+        {
+          "mean_probability": 0.2824169670998336,
+          "observed_rate": 0.0,
+          "count": 58
+        },
+        {
+          "mean_probability": 0.501077878700052,
+          "observed_rate": 0.0,
+          "count": 39
+        },
+        {
+          "mean_probability": 0.704753193734798,
+          "observed_rate": 0.07894736842105263,
+          "count": 38
+        },
+        {
+          "mean_probability": 0.9111700966812021,
+          "observed_rate": 0.2608695652173913,
+          "count": 69
+        }
+      ],
+      "truth_class": "derived_public_context",
+      "capacity_claim": false
+    },
+    {
+      "test_year": 2024,
+      "training_threshold_mw": 71442.22,
+      "brier_score": 0.020211159712820045,
+      "precision": 0.3783068783068783,
+      "recall": 0.9662162162162162,
+      "false_negative_rate": 0.033783783783783786,
+      "calibration_bins": [
+        {
+          "mean_probability": 0.002509692013317896,
+          "observed_rate": 0.00012087513598452798,
+          "count": 8273
+        },
+        {
+          "mean_probability": 0.30170586603361427,
+          "observed_rate": 0.0,
+          "count": 95
+        },
+        {
+          "mean_probability": 0.4944240491489781,
+          "observed_rate": 0.10606060606060606,
+          "count": 66
+        },
+        {
+          "mean_probability": 0.7044961699681932,
+          "observed_rate": 0.10416666666666667,
+          "count": 96
+        },
+        {
+          "mean_probability": 0.9448503022310801,
+          "observed_rate": 0.5118110236220472,
+          "count": 254
+        }
+      ],
+      "truth_class": "derived_public_context",
+      "capacity_claim": false
+    },
+    {
+      "test_year": 2025,
+      "training_threshold_mw": 70830.8175,
+      "brier_score": 0.02186440526295146,
+      "precision": 0.5488454706927176,
+      "recall": 0.9903846153846154,
+      "false_negative_rate": 0.009615384615384616,
+      "calibration_bins": [
+        {
+          "mean_probability": 0.002547980024911173,
+          "observed_rate": 0.0,
+          "count": 8058
+        },
+        {
+          "mean_probability": 0.29249339637470123,
+          "observed_rate": 0.02,
+          "count": 100
+        },
+        {
+          "mean_probability": 0.5047224010443507,
+          "observed_rate": 0.037037037037037035,
+          "count": 81
+        },
+        {
+          "mean_probability": 0.7113063003080966,
+          "observed_rate": 0.24210526315789474,
+          "count": 95
+        },
+        {
+          "mean_probability": 0.9532201470611827,
+          "observed_rate": 0.6666666666666666,
+          "count": 426
+        }
+      ],
+      "truth_class": "derived_public_context",
+      "capacity_claim": false
+    }
+  ],
+  "annual_stress_scenarios": [
+    {
+      "scenario": "observed_context",
+      "peak_mw": 76400.223,
+      "mean_mw": 53728.25716428663,
+      "hours_above_observed_peak": 0,
+      "truth_class": "scenario",
+      "capacity_claim": false
+    },
+    {
+      "scenario": "high_system_load",
+      "peak_mw": 84040.24530000001,
+      "mean_mw": 59101.08288071548,
+      "hours_above_observed_peak": 497,
+      "truth_class": "scenario",
+      "capacity_claim": false
+    },
+    {
+      "scenario": "plus_50_mw_site",
+      "peak_mw": 76450.223,
+      "mean_mw": 53778.25716428664,
+      "hours_above_observed_peak": 1,
+      "truth_class": "scenario",
+      "capacity_claim": false
+    },
+    {
+      "scenario": "plus_100_mw_site",
+      "peak_mw": 76500.223,
+      "mean_mw": 53828.25716428663,
+      "hours_above_observed_peak": 1,
+      "truth_class": "scenario",
+      "capacity_claim": false
+    },
+    {
+      "scenario": "plus_200_mw_site",
+      "peak_mw": 76600.223,
+      "mean_mw": 53928.25716428663,
+      "hours_above_observed_peak": 1,
+      "truth_class": "scenario",
+      "capacity_claim": false
+    }
+  ],
+  "data_centre_flexibility_scenarios": [
+    {
+      "site_load_mw": 50.0,
+      "interruptible_share": 0.0,
+      "battery_power_mw": 12.5,
+      "battery_energy_mwh": 50.0,
+      "gross_peak_mw": 76450.223,
+      "net_peak_mw": 76450.223,
+      "hours_above_context_threshold": 445,
+      "equivalent_battery_cycles": 56.6371179110001,
+      "truth_class": "synthetic_scenario",
+      "capacity_claim": false
+    },
+    {
+      "site_load_mw": 50.0,
+      "interruptible_share": 0.05,
+      "battery_power_mw": 12.5,
+      "battery_energy_mwh": 50.0,
+      "gross_peak_mw": 76450.223,
+      "net_peak_mw": 76447.723,
+      "hours_above_context_threshold": 445,
+      "equivalent_battery_cycles": 56.6371179110001,
+      "truth_class": "synthetic_scenario",
+      "capacity_claim": false
+    },
+    {
+      "site_load_mw": 50.0,
+      "interruptible_share": 0.1,
+      "battery_power_mw": 12.5,
+      "battery_energy_mwh": 50.0,
+      "gross_peak_mw": 76450.223,
+      "net_peak_mw": 76445.223,
+      "hours_above_context_threshold": 444,
+      "equivalent_battery_cycles": 56.673783533000005,
+      "truth_class": "synthetic_scenario",
+      "capacity_claim": false
+    },
+    {
+      "site_load_mw": 100.0,
+      "interruptible_share": 0.0,
+      "battery_power_mw": 25.0,
+      "battery_energy_mwh": 100.0,
+      "gross_peak_mw": 76500.223,
+      "net_peak_mw": 76500.223,
+      "hours_above_context_threshold": 446,
+      "equivalent_battery_cycles": 56.40607302200006,
+      "truth_class": "synthetic_scenario",
+      "capacity_claim": false
+    },
+    {
+      "site_load_mw": 100.0,
+      "interruptible_share": 0.05,
+      "battery_power_mw": 25.0,
+      "battery_energy_mwh": 100.0,
+      "gross_peak_mw": 76500.223,
+      "net_peak_mw": 76495.223,
+      "hours_above_context_threshold": 446,
+      "equivalent_battery_cycles": 56.356073022000054,
+      "truth_class": "synthetic_scenario",
+      "capacity_claim": false
+    },
+    {
+      "site_load_mw": 100.0,
+      "interruptible_share": 0.1,
+      "battery_power_mw": 25.0,
+      "battery_energy_mwh": 100.0,
+      "gross_peak_mw": 76500.223,
+      "net_peak_mw": 76490.223,
+      "hours_above_context_threshold": 446,
+      "equivalent_battery_cycles": 56.30607302200006,
+      "truth_class": "synthetic_scenario",
+      "capacity_claim": false
+    },
+    {
+      "site_load_mw": 200.0,
+      "interruptible_share": 0.0,
+      "battery_power_mw": 50.0,
+      "battery_energy_mwh": 200.0,
+      "gross_peak_mw": 76600.223,
+      "net_peak_mw": 76600.223,
+      "hours_above_context_threshold": 466,
+      "equivalent_battery_cycles": 58.53848687549991,
+      "truth_class": "synthetic_scenario",
+      "capacity_claim": false
+    },
+    {
+      "site_load_mw": 200.0,
+      "interruptible_share": 0.05,
+      "battery_power_mw": 50.0,
+      "battery_energy_mwh": 200.0,
+      "gross_peak_mw": 76600.223,
+      "net_peak_mw": 76590.223,
+      "hours_above_context_threshold": 465,
+      "equivalent_battery_cycles": 58.28499437549999,
+      "truth_class": "synthetic_scenario",
+      "capacity_claim": false
+    },
+    {
+      "site_load_mw": 200.0,
+      "interruptible_share": 0.1,
+      "battery_power_mw": 50.0,
+      "battery_energy_mwh": 200.0,
+      "gross_peak_mw": 76600.223,
+      "net_peak_mw": 76580.223,
+      "hours_above_context_threshold": 462,
+      "equivalent_battery_cycles": 58.074485974000055,
+      "truth_class": "synthetic_scenario",
+      "capacity_claim": false
+    }
+  ],
+  "capacity_claim": false,
+  "available_capacity_mw": null,
+  "limitations": [
+    "The same upstream bidding-zone series is contextual evidence for every requested region.",
+    "No city, line, transformer or substation load is inferred from this series.",
+    "Actual available connection capacity remains unknown without operator evidence."
+  ]
+}

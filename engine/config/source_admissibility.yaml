@@ -1,0 +1,365 @@
+schema_version: source-admissibility-v1
+assessed_at: 2026-08-16
+training_gate: all_required_fields_must_be_true
+sources:
+  - id: edis_completed_measures
+    publisher: E.DIS Netz GmbH
+    authority: distribution_system_operator
+    dataset: Abgeschlossene Einspeisemanagement- und Redispatch-Maßnahmen
+    url: https://www.e-dis-netz.de/de/energie-einspeisen/redispatch-2-0/einspeisemanagement/veroeffentlichungen/abgeschlossene-massnahmen.html
+    access: interactive table with CSV/XLS/PDF export and RSS
+    authentication: none observed
+    historical_coverage: pre-2021 Einspeisemanagement and Redispatch from 2021-10-01; exact earliest retained row must be profiled
+    temporal_resolution: event start/end, reported duration
+    geographic_resolution: published Gebiet and Ort Engpass; not assumed to be a substation
+    publication_revision_semantics: completion and later settlement corrections possible; immutable publication history not exposed
+    units: duration plus control stage; MW and MWh are not guaranteed by the displayed schema
+    licence: no open-data licence identified; retain source citation and seek reuse confirmation for redistribution
+    permitted_uses: [internal_research, public_constraint_context_with_attribution]
+    prohibited_uses: [nodal_available_mw, connection_feasibility, zero_from_no_rows]
+    as_known_reconstruction: false
+    zero_semantics_validated: false
+    admitted_for_training: false
+    decision: Strong regional event candidate, but historical publication/revision reconstruction, reuse terms, and empty-result semantics are unresolved.
+  - id: netztransparenz_redispatch
+    publisher: German transmission system operators
+    authority: transmission_system_operators
+    dataset: Redispatchmaßnahmen
+    url: https://www.netztransparenz.de/de-de/Systemdienstleistungen/Betriebsfuehrung/Redispatch
+    access: web table/download; archive ZIP for 2013-2020
+    authentication: none observed
+    historical_coverage: 2013 onward with material regime changes in 2021 and 2023
+    temporal_resolution: daily publication with event start/end and interval-aware summary quantities
+    geographic_resolution: requesting/instructing TSO and affected plant context; not DSO-node loading
+    publication_revision_semantics: current tables can change; immutable revision archive not established
+    units: MW average/maximum and MWh work, with a documented non-zero-interval averaging rule
+    licence: no open-data licence confirmed on the dataset page
+    permitted_uses: [national_or_control_area_constraint_context, internal_research]
+    prohibited_uses: [distribution_nodal_headroom, capacity_offer, treating_regime_breaks_as_equivalent]
+    as_known_reconstruction: false
+    zero_semantics_validated: false
+    admitted_for_training: false
+    decision: Machine-readable and authoritative, but revision history, licensing, and coverage discontinuities block V1 training admission.
+  - id: entsoe_a63_redispatch
+    publisher: ENTSO-E Transparency Platform
+    authority: european_tso_platform
+    dataset: A63 redispatch mode / Article 13.1.a
+    url: https://transparency.entsoe.eu/content/static_content/download?path=%2FStatic%20content%2Fweb%20api%2FIG-for-TP-data-extraction-process.pdf
+    access: authenticated REST API returning XML
+    authentication: ENTSO-E security token
+    historical_coverage: authenticated bounded probe performed for 2026-08-15 through 2026-08-16
+    temporal_resolution: document time series
+    geographic_resolution: in/out domains; no automatic distribution-node identity
+    publication_revision_semantics: the REST API rejected DOCUMENT_TYPE A63 as an invalid or unavailable extraction combination; no A63 records were returned
+    units: document-specific and must be profiled
+    licence: ENTSO-E terms restrict use to Transparency Purpose; downstream reuse review required
+    permitted_uses: [transparency_research_within_platform_terms]
+    prohibited_uses: [distribution_nodal_headroom, unreported_outage_inference]
+    as_known_reconstruction: false
+    zero_semantics_validated: false
+    admitted_for_training: false
+    decision: Rejected for REST ingestion in V1 because the authenticated API explicitly reports that A63 is not available through this extraction combination; alternative ENTSO-E distribution channels require separate terms and archive testing.
+  - id: entsoe_unavailability
+    publisher: ENTSO-E Transparency Platform
+    authority: european_tso_platform
+    dataset: generation and transmission unavailability documents
+    url: https://transparency.entsoe.eu/content/static_content/download?path=%2FStatic%20content%2Fweb%20api%2FIG-for-TP-data-extraction-process.pdf
+    access: authenticated REST API returning XML
+    authentication: ENTSO-E security token
+    historical_coverage: bounded A78 probe for 2026-08-15 returned 464 effective documents over three offset pages
+    temporal_resolution: event periods and revisions
+    geographic_resolution: bidding zone or named infrastructure where published
+    publication_revision_semantics: document mRID, revisionNumber and createdDateTime are returned; revisionNumber is rejected as an input parameter and mRID retrieval returned the latest effective document only
+    units: MW where supplied; null otherwise
+    licence: ENTSO-E terms and primary-owner rights apply
+    permitted_uses: [outage_context]
+    prohibited_uses: [nodal_headroom, absence_means_no_outage]
+    as_known_reconstruction: false
+    zero_semantics_validated: false
+    admitted_for_training: false
+    decision: Suitable for effective/latest outage cross-validation and prospective snapshots only; superseded-version reconstruction is unavailable through the tested REST interface, so historical training remains quarantined.
+  - id: smard_redispatch
+    publisher: Bundesnetzagentur | SMARD.de
+    authority: federal_regulator
+    dataset: Redispatch, countertrading, network reserve quantities and costs
+    url: https://www.smard.de/home/downloadcenter
+    access: downloadable tables/files
+    authentication: none
+    historical_coverage: redispatch series since July 2022; product-specific coverage must be profiled
+    temporal_resolution: monthly/high-resolution depending series
+    geographic_resolution: Germany, bidding-zone, network-level and energy-carrier aggregates
+    publication_revision_semantics: monthly and continuously updated; historical snapshots are not supplied by the download centre
+    units: MW, MWh, and EUR depending series; never summable across unlike definitions
+    licence: CC BY 4.0 with attribution Bundesnetzagentur | SMARD.de
+    permitted_uses: [national_context, aggregate_redispatch_features]
+    prohibited_uses: [substation_loading, regional_measured_events, nodal_headroom]
+    as_known_reconstruction: false
+    zero_semantics_validated: false
+    admitted_for_training: false
+    decision: Reusable aggregate context, but continuous revision and coarse geography block regional event-target admission.
+  - id: fifty_hertz_measures
+    publisher: 50Hertz Transmission GmbH
+    authority: transmission_system_operator
+    dataset: Measures under section 13 EnWG / congestion management
+    url: https://www.50hertz.com/desktopmodules/remit-ma/api/de/9668/rss
+    access: public RSS with web detail links; CSV export and legacy annual archives also exist
+    authentication: none observed
+    historical_coverage: official UTC CSV exposes 171160 unique quarter-hours from 2021-09-28 through 2026-08-16; date-addressable HTML exposes numbered revision chains
+    temporal_resolution: 15-minute control-area values
+    geographic_resolution: 50Hertz control area; not Berlin or Brandenburg DSO nodes
+    publication_revision_semantics: UTC CSV exposes the latest revision and generation timestamp; date-addressable HTML exposes prior numbered revisions with stable interval IDs; the full CSV contained 37612 intervals ending above revision one and a maximum final revision of 31
+    units: separate increase and reduction MW values; they are preserved separately and never netted implicitly
+    licence: no open-data licence confirmed
+    permitted_uses: [upstream_control_area_constraint_context]
+    prohibited_uses: [distribution_nodal_headroom, connection_feasibility]
+    as_known_reconstruction: experimentally_reconstructable_from_currently_served_revision_pages_but_not_an_operator_immutable_archive
+    zero_semantics_validated: true_for_published_intervals
+    admitted_for_training: false
+    decision: Suitable for an explicitly experimental 50Hertz-control-area risk backtest after complete coverage validation; operational release remains blocked because publisher-side immutability, deletion semantics and reuse terms are unconfirmed.
+  - id: fifty_hertz_transmission_outages
+    publisher: 50Hertz Transmission GmbH
+    authority: transmission_system_operator
+    dataset: Outage and planning RSS
+    url: https://www.50hertz.com/Transparency/GridData/Congestionmanagement/OutageandPlanning?view=rss&SplitView=false
+    access: public rolling RSS with stable event/version links
+    authentication: none
+    historical_coverage: rolling 100-version window observed on 2026-08-16; annual planned-outage PDFs exist separately
+    temporal_resolution: event start/end with timezone-aware publication timestamp
+    geographic_resolution: named transmission asset and 50Hertz control area
+    publication_revision_semantics: GUID contains event and version identifiers; pubDate is UTC; rolling feed does not retain a complete historical revision archive
+    units: affected capacity is a percentage and is not converted to MW; unknown MW remains null
+    licence: no open-data licence confirmed
+    permitted_uses: [prospective_asset_outage_context, identity_review]
+    prohibited_uses: [equipment_rating_inference, nodal_headroom, connection_feasibility]
+    as_known_reconstruction: prospective_only
+    zero_semantics_validated: false
+    admitted_for_training: false
+    decision: Admitted only for prospective context; historical training is blocked by the rolling window and unconfirmed reuse terms.
+  - id: stromnetz_berlin_redispatch
+    publisher: Stromnetz Berlin GmbH
+    authority: distribution_system_operator
+    dataset: Redispatch process information
+    url: https://www.stromnetz.berlin/einspeisen/redispatch/
+    access: HTML; operational exchange through RAIDA
+    authentication: public page; RAIDA is participant-only
+    historical_coverage: no public historical event series identified
+    temporal_resolution: not applicable
+    geographic_resolution: Berlin service area
+    publication_revision_semantics: not applicable to an event archive
+    units: none
+    licence: website terms; no event-data licence identified
+    permitted_uses: [operator_identity, process_context]
+    prohibited_uses: [event_training, nodal_headroom]
+    as_known_reconstruction: false
+    zero_semantics_validated: false
+    admitted_for_training: false
+    decision: Rejected as an event source; the page documents process and identifiers, not historical measures.
+  - id: wesernetz_current_redispatch
+    publisher: wesernetz Bremen GmbH
+    authority: distribution_system_operator
+    dataset: Aktuelle Redispatch-Maßnahmen
+    url: https://www.wesernetz.de/fuer-einspeiser/regulierung/redispatch-2/redispatch-massnahmen
+    access: HTML current-state table
+    authentication: none
+    historical_coverage: no retained public history identified
+    temporal_resolution: event start/end and duration when populated
+    geographic_resolution: Bremen service area and resource identifier
+    publication_revision_semantics: current state only
+    units: setpoint shown; unit semantics require profiling
+    licence: no open-data licence identified
+    permitted_uses: [current_public_constraint_context]
+    prohibited_uses: [historical_training, zero_from_empty_page, nodal_headroom]
+    as_known_reconstruction: false
+    zero_semantics_validated: false
+    admitted_for_training: false
+    decision: Rejected for backtesting because no historical archive or reliable empty-state contract was found.
+  - id: nrm_redispatch
+    publisher: NRM Netzdienste Rhein-Main GmbH
+    authority: distribution_system_operator
+    dataset: Redispatch 2.0 process publications
+    url: https://www.nrm-netzdienste.de/de/einspeisungen/strom/redispatch-2-0
+    access: HTML and process documents; operational exchange through market channels
+    authentication: public process page
+    historical_coverage: no public historical event series identified
+    temporal_resolution: not applicable
+    geographic_resolution: Frankfurt/Rhine-Main operator area
+    publication_revision_semantics: not applicable to an event archive
+    units: none
+    licence: site terms restrict reproduction without permission
+    permitted_uses: [operator_identity, process_context]
+    prohibited_uses: [event_training, redistribution, nodal_headroom]
+    as_known_reconstruction: false
+    zero_semantics_validated: false
+    admitted_for_training: false
+    decision: Rejected as a historical event source; no reusable event download was identified.
+  - id: stromnetz_berlin_regional_load
+    publisher: Stromnetz Berlin GmbH
+    authority: distribution_system_operator
+    dataset: Historie Jahreshöchstlast Netzlast und Hochspannung
+    url: https://www.stromnetz.berlin/files/globalassets/dokumente/opendata/veroffentlichungspflichten/historie-jahreshoechstlast-hochspannung-berlin.xlsx
+    access: public XLSX
+    authentication: none
+    historical_coverage: aggregate history contains 454989 quarter-hours; high-voltage sheets cover 2020-2025 with 210432 quarter-hours
+    temporal_resolution: 15 minutes
+    geographic_resolution: Berlin total or published voltage level; not a substation
+    publication_revision_semantics: each annual sheet declares a later Stand date; earlier workbook revisions are not exposed
+    units: kW explicitly declared in each profiled high-voltage sheet
+    licence: website reuse terms require review; no separate open-data licence confirmed
+    permitted_uses: [regional_load_context_after_timestamp_validation]
+    prohibited_uses: [substation_loading, nodal_headroom, available_connection_mw]
+    as_known_reconstruction: false
+    zero_semantics_validated: true
+    admitted_for_training: false
+    decision: Real regional load is available, but local timestamps lack offsets and annual files were published after the measured year; quarantine until DST and publication-aware use are explicitly bounded.
+  - id: wesernetz_regional_load_2025
+    publisher: wesernetz Bremen GmbH
+    authority: distribution_system_operator
+    dataset: Übergabe vorgelagertes Netz plus generation minus feedback, Bremen and Bremerhaven
+    url: https://www.wesernetz.de/fuer-partner/energielieferanten/stromnetz/strukturdaten-des-bremer-und-bremerhavener-stromnetzes
+    access: public CSV
+    authentication: none
+    historical_coverage: 2025 files captured; 35040 quarter-hours for each of Bremen and Bremerhaven
+    temporal_resolution: 15 minutes
+    geographic_resolution: Bremen or Bremerhaven regional aggregate
+    publication_revision_semantics: annual current download; prior publication revisions are not exposed
+    units: MW validated against published annual maximum; energy summary is separate
+    licence: no separate open-data licence confirmed
+    permitted_uses: [regional_load_context_after_timestamp_validation]
+    prohibited_uses: [substation_loading, nodal_headroom, available_connection_mw]
+    as_known_reconstruction: false
+    zero_semantics_validated: true
+    admitted_for_training: false
+    decision: Numeric coverage is complete for 2025, but four repeated autumn local timestamps have no offsets/fold indicator and annual publication timing prevents contemporaneous historical use.
+  - id: fifty_hertz_vertical_grid_load
+    publisher: 50Hertz Transmission GmbH
+    authority: transmission_system_operator
+    dataset: Vertical Grid Load
+    url: https://www.50hertz.com/en/Transparency/GridData/Gridfigures/VerticalGridLoad
+    access: public HTML and linked CSV archives
+    authentication: none
+    historical_coverage: archive links require file-level crawl and profiling
+    temporal_resolution: 15-minute average MW
+    geographic_resolution: 50Hertz control area
+    publication_revision_semantics: current/archive publication; superseded file history unproven
+    units: MW; publisher uses n/a for missing or implausible values
+    licence: no dataset-specific open licence confirmed
+    permitted_uses: [control_area_load_context]
+    prohibited_uses: [distribution_node_loading, nodal_headroom, connection_feasibility]
+    as_known_reconstruction: prospective_only
+    zero_semantics_validated: true
+    admitted_for_training: false
+    decision: Publication page captured and admitted for archive discovery; CSV files require separate immutable capture and revision audit before modelling.
+  - id: stromnetz_berlin_repartition
+    publisher: Stromnetz Berlin GmbH
+    authority: distribution_system_operator
+    dataset: Repartierungsverfahren for demand above 3.5 MVA
+    url: https://www.stromnetz.berlin/anschliessen/anschluss-mittel-hochspannung/repartierung/
+    access: public HTML and allocation documents
+    authentication: none
+    historical_coverage: process introduced for 2025; 2026 publication postponed
+    temporal_resolution: allocation period
+    geographic_resolution: published allocation area/topogram, when released
+    publication_revision_semantics: prospective page changes; captured snapshots required
+    units: MVA, not interchangeable with MW without power factor
+    licence: website terms; redistribution review required
+    permitted_uses: [allocation_process_context, prospective_monitoring]
+    prohibited_uses: [substation_headroom, converting_mva_to_mw_without_power_factor]
+    as_known_reconstruction: prospective_only
+    zero_semantics_validated: false
+    admitted_for_training: false
+    decision: Decisive operator-published allocation context, but no 2026 capacity publication or applicant-level outcome history is currently available.
+  - id: edis_network_development_plan_2024
+    publisher: E.DIS Netz GmbH | VNBdigital
+    authority: distribution_system_operator
+    dataset: Netzausbauplan under section 14d EnWG
+    url: https://www.vnbdigital.de/gateway/files?fileId=6630debe99abd27c97c7cd38&preview=1&serviceName=vnb
+    access: public PDF
+    authentication: none
+    historical_coverage: planning horizons 2028, 2033 and 2045
+    temporal_resolution: planning period
+    geographic_resolution: Brandenburg planning/constraint regions and named projects
+    publication_revision_semantics: dated plan editions; not operational state history
+    units: km, MVA, EUR and dates depending table
+    licence: public planning publication; downstream reproduction review required
+    permitted_uses: [planned_reinforcement_context, synthetic_scenario_design]
+    prohibited_uses: [current_capacity, current_equipment_rating, connection_feasibility]
+    as_known_reconstruction: true_for_dated_plan_only
+    zero_semantics_validated: false
+    admitted_for_training: false
+    decision: Captured and admitted as planned-reinforcement context only; planned MVA is never current available capacity.
+  - id: nrm_pro_rata_allocation
+    publisher: NRM Netzdienste Rhein-Main GmbH
+    authority: distribution_system_operator
+    dataset: Pro-rata procedure for demand above 3.5 MW
+    url: https://www.nrm-netzdienste.de/de/netzanschluss/pro-rata-verfahren-strom
+    access: public HTML and application documents
+    authentication: none for publications; application portal may require an account
+    historical_coverage: current procedure and published rounds
+    temporal_resolution: allocation round
+    geographic_resolution: Frankfurt operator service area
+    publication_revision_semantics: prospective snapshots required; applicant queue is not public
+    units: MW
+    licence: website terms; redistribution review required
+    permitted_uses: [allocation_process_context, prospective_monitoring]
+    prohibited_uses: [individual_queue_inference, nodal_headroom, connection_feasibility]
+    as_known_reconstruction: prospective_only
+    zero_semantics_validated: false
+    admitted_for_training: false
+    decision: Captured as decisive process context; real queue, reservations and individual outcomes require an operator agreement.
+  - id: dwd_hostrada_hourly_grid
+    publisher: Deutscher Wetterdienst
+    authority: federal_weather_service
+    dataset: HOSTRADA high-resolution hourly grids
+    url: https://opendata.dwd.de/climate_environment/CDC/grids_germany/hourly/hostrada/
+    access: public HTTPS directory
+    authentication: none
+    historical_coverage: product-specific files with published version metadata
+    temporal_resolution: hourly
+    geographic_resolution: Germany gridded weather
+    publication_revision_semantics: dataset version and publication date are documented
+    units: variable-specific SI units
+    licence: DWD open-data terms
+    permitted_uses: [weather_context, synthetic_operating_scenarios]
+    prohibited_uses: [grid_loading, nodal_capacity]
+    as_known_reconstruction: version_dependent
+    zero_semantics_validated: parameter_dependent
+    admitted_for_training: false
+    decision: Description captured; individual variable files require timestamp and version admission before feature use.
+  - id: simbench_reference_networks
+    publisher: SimBench project consortium
+    authority: research_reference
+    dataset: SimBench network models and time series
+    url: https://simbench.de/en/download/
+    access: Python package and downloadable CSV/reference documentation
+    authentication: none
+    historical_coverage: versioned synthetic/reference scenarios
+    temporal_resolution: scenario time series
+    geographic_resolution: synthetic German-style reference networks
+    publication_revision_semantics: package/version based
+    units: electrical model units declared by schema
+    licence: package and dataset terms must be retained
+    permitted_uses: [synthetic_benchmark, solver_validation]
+    prohibited_uses: [real_network_claim, operator_confirmation]
+    as_known_reconstruction: not_applicable_synthetic
+    zero_semantics_validated: schema_dependent
+    admitted_for_training: false
+    decision: Admitted only as a synthetic reference; direct documentation download was unavailable during the 2026-08-16 execution and the installed package remains the executable reference.
+  - id: entsoe_cgmes_reference
+    publisher: ENTSO-E
+    authority: european_tso_platform
+    dataset: CGMES schemas, profiles and reference artifacts
+    url: https://www.entsoe.eu/data/cim/cim-for-grid-models-exchange/
+    access: public documentation; actual planning grid datasets require request and some require NDA
+    authentication: none for schemas; institutional process for grid datasets
+    historical_coverage: versioned standards/reference artifacts
+    temporal_resolution: model-effective timestamp when a dataset is supplied
+    geographic_resolution: exchange standard, not an operational network publication
+    publication_revision_semantics: explicit standard releases
+    units: CIM/CGMES profile-defined
+    licence: artifact-specific ENTSO-E/IEC terms
+    permitted_uses: [network_schema_interoperability, operator_import_design]
+    prohibited_uses: [claiming_public_schema_is_operational_grid, live_capacity]
+    as_known_reconstruction: not_applicable_to_schema
+    zero_semantics_validated: false
+    admitted_for_training: false
+    decision: Public library captured for schema design; a real CGMES grid model remains application/NDA data and must enter as operator-model unvalidated.

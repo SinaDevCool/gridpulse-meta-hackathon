@@ -1,0 +1,7 @@
+{
+  "schema_version": "gridpulse-flexibility-economics-v1",
+  "import_price_eur_per_mwh": [100.0, 10.0, 10.0, 10.0],
+  "battery_degradation_eur_per_mwh": 2.0,
+  "cooling_recovery_eur_per_mwh": 1.0,
+  "peak_import_eur_per_mw": 5.0
+}

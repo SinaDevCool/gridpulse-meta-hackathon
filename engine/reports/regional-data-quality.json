@@ -1,0 +1,25 @@
+{
+  "schema_version": "regional-data-quality-v1",
+  "assessed_on": "2026-08-16",
+  "status": "blocked_before_ingestion",
+  "admitted_source_count": 0,
+  "raw_downloaded_bytes": 0,
+  "normalized_record_count": 0,
+  "event_count": null,
+  "coverage_start": null,
+  "coverage_end": null,
+  "geographic_resolution": "unknown",
+  "timestamp_profile": "unavailable",
+  "daylight_saving_profile": "unavailable",
+  "revision_profile": "unavailable",
+  "unit_profile": "unavailable",
+  "duplicate_profile": "unavailable",
+  "missingness_profile": "unavailable",
+  "zero_semantics_validated": false,
+  "totals_summable": null,
+  "training_allowed": false,
+  "reasons": [
+    "No candidate simultaneously exposes reconstructable publication-time revisions, validated stable geography, validated empty-response semantics, units, and confirmed reuse rights.",
+    "Missing records must not be treated as zero events."
+  ]
+}

@@ -1,0 +1,103 @@
+{
+  "schema_version": "regional-constraint-execution-v1",
+  "executed_at": "2026-08-16",
+  "durable_storage": {
+    "provider": "onedrive_filesystem",
+    "root": "C:\\Users\\sinak\\OneDrive\\GridPulse Capacity Research Data",
+    "raw_files": 36,
+    "raw_bytes": 38749302,
+    "normalized_files": 1,
+    "normalized_bytes": 215738,
+    "quality_reports": 8,
+    "quality_report_bytes": 11844,
+    "verified_manifests": 18,
+    "manifest_failures": 0
+  },
+  "sources": {
+    "fifty_hertz_measures_rss": {
+      "snapshot_sha256": "b0c256f8d95a76dadfedd0567467fc94554c4cd91fc0414a427aedfd62a76f83",
+      "records": 348,
+      "unique_intervals": 192,
+      "revised_intervals": 43,
+      "maximum_revision": 9,
+      "active_final_intervals": 43,
+      "coverage_utc": ["2026-08-14T22:00:00+00:00", "2026-08-16T22:00:00+00:00"],
+      "admission": "prospective_context_only"
+    },
+    "edis_completed_rss": {
+      "snapshot_sha256": "2e319bbd5f0d0619c08018f2a8a6b346fd714832b8d33e5db2678de834e54e9e",
+      "records": 50,
+      "duplicates": 0,
+      "admission": "quarantined_publication_semantics"
+    },
+    "netztransparenz_redispatch_archive_2013_2020": {
+      "snapshot_sha256": "e04268480f27a57a9e9b9701c248695b3c1835ed9cfb6f3caf4e3913b87023b9",
+      "records": 40118,
+      "coverage": ["2013-04-02", "2020-12-31"],
+      "timezone": "UTC",
+      "exact_duplicate_records": 568,
+      "invalid_numeric_values": 0,
+      "admission": "outcome_context_only_no_publication_archive"
+    },
+    "stromnetz_berlin_hv_peak_load_history": {
+      "snapshot_sha256": "2bb8bcc877d4afee10133ae9b936342706cecab89bba381348ac09b33a737281",
+      "records": 210432,
+      "coverage": [2020, 2025],
+      "unit": "kW",
+      "admission": "quarantined_timezone_and_publication_semantics"
+    },
+    "stromnetz_berlin_peak_load_history": {
+      "snapshot_sha256": "d0328993dfc0631955012bce0b9db76dc38818770631dc02d3c73156fe859af2",
+      "records": 454989,
+      "admission": "quarantined_timezone_and_publication_semantics"
+    },
+    "wesernetz_bremen_upstream_load_2025": {
+      "snapshot_sha256": "2da63b5e55e649a2fe43e80f40dfd7ecc272f37a630c8a9e9bf2181d8d3b6f38",
+      "records": 35040,
+      "duplicate_local_dst_timestamps": 4,
+      "range_mw": [204.97, 738.974],
+      "admission": "quarantined_dst_offset_semantics"
+    },
+    "wesernetz_bremerhaven_upstream_load_2025": {
+      "snapshot_sha256": "35dc5864abfafb169ab919e810f6ea19d58d8158fe6c8e9ccfad15947d259552",
+      "records": 35040,
+      "admission": "quarantined_dst_offset_semantics"
+    }
+  },
+  "regional_model": {
+    "status": "unavailable",
+    "release_gate": "failed_no_training_admissible_regional_event_source",
+    "out_of_sample_results_by_year": null,
+    "calibration_results": null,
+    "reason": "No source has a complete historical publication/revision archive plus validated reuse and regional identity."
+  },
+  "synthetic_benchmark": {
+    "evaluated_cases": 320,
+    "unique_candidates": 15,
+    "network_families": 4,
+    "mean_absolute_error_mw": 53.869,
+    "median_absolute_error_mw": 45.0,
+    "overstatement_rate": 0.1906,
+    "severe_overstatement_rate": 0.1187,
+    "interval_coverage": 0.875,
+    "top_10_recall": 0.35,
+    "contingency_selector_audit_cases": 32,
+    "contingency_selector_recall": 0.1875,
+    "ranking_gate": "failed",
+    "capacity_gate": "failed",
+    "flexibility_summaries": 800,
+    "classification": "synthetic_benchmark"
+  },
+  "verification": {
+    "tests": "87 passed",
+    "ruff_lint": "passed",
+    "ruff_format": "26 pre-existing files would be reformatted",
+    "manifest_verification": "18 passed, 0 failed",
+    "secret_scan": "passed",
+    "type_check": "not_configured"
+  },
+  "operator_confirmed_capacity": {
+    "status": "unavailable",
+    "available_mw": null
+  }
+}

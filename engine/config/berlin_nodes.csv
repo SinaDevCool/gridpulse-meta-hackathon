@@ -1,0 +1,18 @@
+node_id,official_name,alternative_names,operator,voltage_kv,latitude,longitude,technical_area_id,official_source_reference
+berlin_node_01,Unresolved official node 01,,Stromnetz Berlin,110,,,,stromnetz_berlin_kraftnav
+berlin_node_02,Unresolved official node 02,,Stromnetz Berlin,110,,,,stromnetz_berlin_kraftnav
+berlin_node_03,Unresolved official node 03,,Stromnetz Berlin,110,,,,stromnetz_berlin_kraftnav
+berlin_node_04,Unresolved official node 04,,Stromnetz Berlin,110,,,,stromnetz_berlin_kraftnav
+berlin_node_05,Unresolved official node 05,,Stromnetz Berlin,110,,,,stromnetz_berlin_kraftnav
+berlin_node_06,Unresolved official node 06,,Stromnetz Berlin,110,,,,stromnetz_berlin_kraftnav
+berlin_node_07,Unresolved official node 07,,Stromnetz Berlin,110,,,,stromnetz_berlin_kraftnav
+berlin_node_08,Unresolved official node 08,,Stromnetz Berlin,110,,,,stromnetz_berlin_kraftnav
+berlin_node_09,Unresolved official node 09,,Stromnetz Berlin,110,,,,stromnetz_berlin_kraftnav
+berlin_node_10,Unresolved official node 10,,Stromnetz Berlin,110,,,,stromnetz_berlin_kraftnav
+berlin_node_11,Unresolved official node 11,,Stromnetz Berlin,110,,,,stromnetz_berlin_kraftnav
+berlin_node_12,Unresolved official node 12,,Stromnetz Berlin,110,,,,stromnetz_berlin_kraftnav
+berlin_node_13,Unresolved official node 13,,Stromnetz Berlin,110,,,,stromnetz_berlin_kraftnav
+berlin_node_14,Unresolved official node 14,,Stromnetz Berlin,110,,,,stromnetz_berlin_kraftnav
+berlin_node_15,Unresolved official node 15,,Stromnetz Berlin,110,,,,stromnetz_berlin_kraftnav
+berlin_node_16,Unresolved official node 16,,Stromnetz Berlin,110,,,,stromnetz_berlin_kraftnav
+berlin_node_17,Unresolved official node 17,,Stromnetz Berlin,110,,,,stromnetz_berlin_kraftnav

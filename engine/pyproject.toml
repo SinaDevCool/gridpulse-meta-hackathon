@@ -1,0 +1,72 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "gridpulse-capacity-backtest"
+version = "0.2.3"
+description = "Self-contained, evidence-governed backtesting lab for grid connection capacity methods."
+requires-python = ">=3.10"
+dependencies = [
+  "gridpulse-grid-core>=0.2,<0.3",
+  "httpx>=0.27,<1",
+  "openpyxl>=3.1,<4",
+  "pypdf>=5,<7",
+  "PyYAML>=6,<7",
+  "shapely>=2,<3",
+]
+
+[project.scripts]
+capacity-backtest = "capacity_backtest.cli:main"
+
+[project.optional-dependencies]
+planner = ["numpy>=1.26,<2", "scipy>=1.11,<2"]
+study = [
+  "pandapower>=3,<4",
+  "simbench>=1.6,<2",
+  "pandas>=2.2,<3",
+  "numpy>=1.26,<2",
+  "scipy>=1.11,<2",
+  "pypower>=5.1.19,<6",
+  "scikit-learn>=1.5,<2",
+]
+tabpfn = ["tabpfn-client>=0.1,<1"]
+graph = ["neo4j>=5,<7"]
+dev = ["pytest>=8,<9", "ruff>=0.6,<1", "mypy>=1.11,<2", "types-PyYAML>=6,<7"]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "--strict-markers"
+markers = [
+  "core: contracts, evidence, lineage, storage, and validation",
+  "capacity: network physics, capacity studies, envelopes, and requirements",
+  "capacity_contract: capacity contracts, requirements, and governance",
+  "capacity_physics: AC, network, contingency, and resource physics",
+  "capacity_pipeline: capacity orchestration, forecasting, and integration",
+  "planning: workloads, resources, facility physics, optimization, uncertainty, and rolling planning",
+  "market: chronological facility backtesting, economics, eligibility, and settlement",
+  "shadow: telemetry, inert commands, digital twin, delivery verification, reporting, and adapters",
+  "territory: territory resolution and regional public-data workflows",
+  "territory_resolution: territory identity, geometry, responsibility, and confirmation",
+  "territory_sources: regional and operator public-data ingestion",
+  "legacy: preserved research, benchmark, and compatibility regressions",
+  "slow: comparatively expensive integration or external-format tests",
+]
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"
+
+[tool.ruff.lint.per-file-ignores]
+# Preserved upstream implementation; ActivationPolicy is a frozen dataclass.
+"src/grid_data/activatable_capacity.py" = ["B008"]
+
+[tool.mypy]
+python_version = "3.10"
+files = ["src/capacity_backtest/capacity_study"]
+check_untyped_defs = true
+warn_unused_ignores = true
+no_implicit_optional = true

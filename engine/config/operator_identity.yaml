@@ -1,0 +1,32 @@
+schema_version: operator-identity-v1
+operators:
+  - canonical_id: 50hertz
+    canonical_name: 50Hertz Transmission GmbH
+    aliases: [50Hertz, 50 Hertz, 50Hertz Transmission]
+    control_area: 10YDE-VE-------2
+    regions: [DE-BE, DE-BB]
+    match_resolution: tso_control_area_context
+  - canonical_id: edis
+    canonical_name: E.DIS Netz GmbH
+    aliases: [E.DIS, E.DIS Netz, EDIS]
+    control_area: 10YDE-VE-------2
+    regions: [DE-BB]
+    match_resolution: operator_service_area
+  - canonical_id: stromnetz_berlin
+    canonical_name: Stromnetz Berlin GmbH
+    aliases: [Stromnetz Berlin, SNB]
+    control_area: 10YDE-VE-------2
+    regions: [DE-BE]
+    match_resolution: operator_service_area
+  - canonical_id: wesernetz_bremen
+    canonical_name: wesernetz Bremen GmbH
+    aliases: [wesernetz, wesernetz Bremen]
+    control_area: 10YDE-EON------1
+    regions: [DE-HB]
+    match_resolution: operator_service_area
+  - canonical_id: nrm
+    canonical_name: NRM Netzdienste Rhein-Main GmbH
+    aliases: [NRM, NRM Netzdienste Rhein-Main]
+    control_area: unknown_multiple_upstream_contexts
+    regions: [DE-HE-FRA, DE-RHEIN-MAIN]
+    match_resolution: operator_service_area

@@ -1,0 +1,16 @@
+{
+  "name": "GridPulse Power Finder",
+  "short_name": "Power Finder",
+  "description": "Public-source German grid and industrial-site screening. No account required.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#07131f",
+  "theme_color": "#07131f",
+  "icons": [
+    {
+      "src": "/favicon.ico",
+      "sizes": "any",
+      "type": "image/x-icon"
+    }
+  ]
+}

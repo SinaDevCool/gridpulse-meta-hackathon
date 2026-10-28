@@ -1,0 +1,26 @@
+{
+  "schema_version": "gridpulse-phase1-golden-v1",
+  "forecast": {
+    "components": ["it_load", "cooling", "auxiliary", "battery_charging", "onsite_generation"],
+    "expected_component_count": 5,
+    "expected_reconciliation_error_mw": 0.0
+  },
+  "ac": {
+    "base_case_capacity_mw": 80.0,
+    "firm_import_capacity_mw": 60.0,
+    "reserved_capacity_mw": 5.0,
+    "expected_n0_mw": 80.0,
+    "expected_n1_mw": 60.0
+  },
+  "surrogate": {
+    "minimum_training_rows": 20,
+    "ood_feature": "load_factor",
+    "ood_value": 4.0,
+    "expected_status": "abstained_ood"
+  },
+  "risk": {
+    "confidence": 0.9,
+    "expected_policy_count": 6,
+    "oracle_unsafe_hours": 0
+  }
+}

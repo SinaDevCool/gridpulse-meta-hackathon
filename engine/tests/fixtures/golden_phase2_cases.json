@@ -1,0 +1,21 @@
+{
+  "schema_version": "gridpulse-phase2-golden-v1",
+  "battery": {
+    "rated_power_mw": 10.0,
+    "rated_energy_mwh": 20.0,
+    "initial_soc_mwh": 15.0,
+    "minimum_reserve_mwh": 5.0,
+    "soc_uncertainty_mwh": 1.0,
+    "first_request_mw": 10.0,
+    "expected_first_delivery_mw": 9.0
+  },
+  "fatigue": {
+    "activation_mw": [5, 5, 5, 0, 5, 5],
+    "maximum_consecutive_hours": 2,
+    "expected_violation": "maximum_consecutive_event_hours"
+  },
+  "phase_power": {
+    "balanced_mw": {"a": 10, "b": 10, "c": 10},
+    "unbalanced_mw": {"a": 20, "b": 5, "c": 5}
+  }
+}

@@ -1,0 +1,61 @@
+sources:
+  - id: stromnetz_berlin_enwg
+    publisher: Stromnetz Berlin GmbH
+    title: EnWG publication obligations and Berlin load profiles
+    url: https://www.stromnetz.berlin/uber-uns/veroffentlichungspflichten/energiewirtschaftsgesetz-enwg/
+    format: html
+    authority: operator
+    coverage: Berlin distribution grid
+    voltage_scope: [110, 10, 0.4]
+    purposes: [demand, equipment_summary]
+    prohibited_uses: [nodal_headroom, connection_feasibility]
+    truth_class: operator_published
+    enabled: true
+  - id: stromnetz_berlin_repartierung
+    publisher: Stromnetz Berlin GmbH
+    title: Allocation procedure for connections above 3.5 MVA
+    url: https://www.stromnetz.berlin/anschliessen/anschluss-mittel-hochspannung/repartierung/
+    format: html
+    authority: operator
+    coverage: Three technical Berlin network areas
+    voltage_scope: [110, 10]
+    purposes: [historical_allocation, constraint_signal]
+    prohibited_uses: [current_residual_capacity, nodal_headroom]
+    truth_class: operator_published
+    enabled: true
+  - id: stromnetz_berlin_allocation_2025
+    publisher: Stromnetz Berlin GmbH
+    title: 2025 allocation procedure result
+    url: https://www.stromnetz.berlin/uber-uns/presse/pressemitteilungen-2025/antragsteller-fuer-sehr-grosse-netzanschluesse-wurden-ueber-ergebnis-im-diesjaehrigen-zuteilungsverfahren-informiert/
+    format: html
+    authority: operator
+    coverage: Three technical Berlin network areas
+    voltage_scope: [110, 10]
+    purposes: [historical_allocation, constraint_signal]
+    prohibited_uses: [current_residual_capacity, nodal_headroom]
+    truth_class: operator_published
+    enabled: true
+  - id: stromnetz_berlin_kraftnav
+    publisher: Stromnetz Berlin GmbH
+    title: KraftNAV 110 kV network schematic publication
+    url: https://www.stromnetz.berlin/uber-uns/veroffentlichungspflichten/kraftwerksnetzanschlussverordnung-kraftnav/
+    format: html
+    authority: operator
+    coverage: Berlin 110 kV grid
+    voltage_scope: [110]
+    purposes: [topology, node_identity]
+    prohibited_uses: [branch_ratings, nodal_headroom]
+    truth_class: operator_published
+    enabled: true
+  - id: stromnetz_berlin_hv_requirements
+    publisher: Stromnetz Berlin GmbH
+    title: Technical documents for connection to the Berlin high-voltage grid
+    url: https://www.stromnetz.berlin/anschliessen/anschluss-mittel-hochspannung/
+    format: html
+    authority: operator
+    coverage: Berlin 110 kV connection requirements
+    voltage_scope: [110]
+    purposes: [security_policy, equipment_requirements]
+    prohibited_uses: [nodal_headroom]
+    truth_class: operator_published
+    enabled: true

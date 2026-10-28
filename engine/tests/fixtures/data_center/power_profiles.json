@@ -1,0 +1,14 @@
+{
+  "schema_version": "gridpulse-piecewise-power-profile-v1",
+  "profiles": [
+    {
+      "profile_id": "training-8gpu",
+      "workload_id": "training-1",
+      "truth_class": "synthetic_demonstration",
+      "points": [
+        {"gpu_count": 8, "power_cap_mw": 0.04, "throughput_fraction": 0.5},
+        {"gpu_count": 8, "power_cap_mw": 0.08, "throughput_fraction": 1.0}
+      ]
+    }
+  ]
+}

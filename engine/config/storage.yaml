@@ -1,0 +1,41 @@
+schema_version: gridpulse-storage-v2
+durable:
+  provider: onedrive_filesystem
+  default_folder: GridPulse Capacity Research Data
+  root_env: GRIDPULSE_DATA_ROOT
+  require_cloud_for_regional_capture: true
+  immutable_raw: true
+working:
+  provider: local_filesystem
+  default_folder: Documents/GridPulse-Capacity-Work
+  root_env: GRIDPULSE_WORK_ROOT
+  disposable: true
+retention:
+  raw_snapshots: permanent
+  manifests: permanent
+  normalized_versions: permanent
+  temporary_downloads: remove_after_verified_copy
+  caches: disposable
+prohibited:
+  - credentials
+  - live_neo4j_database_in_cloud_storage
+  - unmanifested_training_inputs
+durable_directories:
+  - raw
+  - manifests
+  - normalized
+  - derived
+  - features
+  - targets
+  - models
+  - predictions
+  - simulations
+  - runs
+  - reports
+  - site-portfolios
+  - operator-confidential
+  - telemetry
+  - exports
+  - quality
+  - quarantine
+  - backups

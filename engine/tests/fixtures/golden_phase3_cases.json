@@ -1,0 +1,22 @@
+{
+  "schema_version": "gridpulse-phase3-golden-v1",
+  "telemetry": {
+    "nominal_voltage_kv": 20.0,
+    "current_limit_a": 2000.0,
+    "maximum_age_seconds": 5.0,
+    "minimum_power_factor": 0.95
+  },
+  "control": {
+    "measured_active_mw": 70.0,
+    "conditional_limit_mw": 60.0,
+    "firm_limit_mw": 50.0,
+    "expected_valid_limit_mw": 60.0,
+    "expected_fail_safe_limit_mw": 50.0
+  },
+  "delivery": {
+    "baseline_mw": 70.0,
+    "observed_mw": 60.0,
+    "requested_reduction_mw": 10.0,
+    "expected_ratio": 1.0
+  }
+}

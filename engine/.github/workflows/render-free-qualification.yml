@@ -1,0 +1,85 @@
+name: Render Free resource gate (no deployment)
+on:
+  push:
+    branches: [codex/facility-optimizer-qualification]
+    paths:
+      - deployment/render/**
+      - src/capacity_backtest/data_center/**
+      - pyproject.toml
+      - .dockerignore
+      - .github/workflows/render-free-qualification.yml
+  pull_request:
+    paths:
+      - .render-core
+      - deployment/render/**
+      - src/**
+      - tests/**
+      - pyproject.toml
+      - .dockerignore
+      - .github/workflows/render-free-qualification.yml
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: render-free-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  resource-gate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - name: Resolve API revision from release submodule
+        id: core
+        shell: bash
+        run: |
+          core_sha=$(git rev-parse HEAD:.render-core)
+          [[ "$core_sha" =~ ^[0-9a-f]{40}$ ]] || exit 1
+          echo "sha=$core_sha" >> "$GITHUB_OUTPUT"
+          echo "API revision: $core_sha" >> "$GITHUB_STEP_SUMMARY"
+      - uses: actions/checkout@v4
+        with:
+          repository: SinaDevCool/gridpulse
+          ref: ${{ steps.core.outputs.sha }}
+          token: ${{ secrets.GRIDPULSE_CORE_READ_TOKEN }}
+          path: .dependencies/gridpulse
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Generate exact browser request
+        working-directory: .dependencies/gridpulse
+        env:
+          GRIDPULSE_MILP_REQUEST_OUTPUT: browser-milp-request.json
+        run: npm ci && npx vitest run src/features/operations/synthetic-milp-request.test.ts --maxWorkers=2
+      - name: Build qualification image from exact checked-out candidates
+        run: docker build --build-context core=.dependencies/gridpulse -f deployment/render/Dockerfile.qualification -t gridpulse-resource-gate .
+      - name: Run real API and solver together under Free-sized limits
+        run: |
+          mkdir -p reports
+          docker create --name resource-gate --memory=512m --memory-swap=512m --cpus=0.1 --pids-limit=128 gridpulse-resource-gate
+          docker start resource-gate
+          (while [ "$(docker inspect -f '{{.State.Running}}' resource-gate)" = true ]; do docker stats --no-stream --format '{{json .}}' resource-gate >> reports/container-stats.jsonl; sleep 2; done) &
+          monitor_pid=$!
+          set +e
+          timeout 600 docker wait resource-gate > reports/exit-code.txt
+          wait_status=$?
+          if [ "$wait_status" -ne 0 ]; then docker stop -t 5 resource-gate; fi
+          wait "$monitor_pid"
+          docker logs resource-gate > reports/container.log 2>&1
+          cat reports/container.log
+          docker inspect resource-gate > reports/container-inspect.json
+          docker inspect -f 'exit={{.State.ExitCode}} oom={{.State.OOMKilled}} error={{.State.Error}}' resource-gate
+          docker cp resource-gate:/reports/. reports/
+          test "$wait_status" -eq 0 && test "$(cat reports/exit-code.txt)" = 0
+      - name: Record scope of qualification
+        if: always()
+        run: |
+          echo 'API + solver integration and checkpoint tests: 512 MiB hard memory, no swap, 0.1 CPU, 600 second wall-clock cap.' >> "$GITHUB_STEP_SUMMARY"
+          echo 'Includes the 96-interval browser model and constrained variants. This is synthetic qualification, not representative customer sizing or permission to deploy.' >> "$GITHUB_STEP_SUMMARY"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: render-free-resource-gate-${{ github.sha }}
+          path: reports/
+          retention-days: 7
