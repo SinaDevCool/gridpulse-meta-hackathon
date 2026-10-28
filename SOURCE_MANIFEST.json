@@ -8,7 +8,7 @@
   "sources": [
     {
       "name": "product",
-      "commit": "c5fcd5931d9d76abc66c95c49d9949ae045ace9a",
+      "commit": "950b5bac47a38436818bb7f2f1530acdf156bd86",
       "files": [
         {
           "path": ".env.example",
@@ -1097,8 +1097,8 @@
         },
         {
           "path": "scripts/qualify-copilot-conversation.ts",
-          "sha256": "5f2ab81cf7e40d04c2a9f86d82dc85cf606508b8f7c6cfcbc6cd9eb95decd9a8",
-          "bytes": 15544
+          "sha256": "a9b22ece74f2cab7387fac4b31ffb3bb955ef0092492e7b567f3b608d8e442a3",
+          "bytes": 15607
         },
         {
           "path": "scripts/qualify-copilot-providers.ts",
@@ -4227,13 +4227,13 @@
         },
         {
           "path": "src/features/operations/copilot/conversation-query.test.ts",
-          "sha256": "721bf77cafba6bcd8caf7ed009d6308293e18a7b98fa7e94631bf26d71ea4be7",
-          "bytes": 9381
+          "sha256": "d8e09da10b14a46983f0fe535c086f0282b0f29c06a7613c054dfac7bf4a171a",
+          "bytes": 9768
         },
         {
           "path": "src/features/operations/copilot/conversation-query.ts",
-          "sha256": "2b77a9f4f4c6023935e0562eda6c05e80fb7e427db2cecd0c98b691ed5737394",
-          "bytes": 20021
+          "sha256": "1ca592d0c3e6f9eaeee156edf768b740eade6473fd94d2bb73b5b87e00c90033",
+          "bytes": 19987
         },
         {
           "path": "src/features/operations/copilot/copilot-client.ts",
@@ -6097,8 +6097,8 @@
         },
         {
           "path": "src/server/operations/copilot-conversation.test.ts",
-          "sha256": "a1aa5ff318188522f310ed9c7975775b4637133798049ea62390148b5170ad8e",
-          "bytes": 19023
+          "sha256": "2745d74a38dc645b405c50d778c918f6df649e70f963bc40083b0cfbb417fc11",
+          "bytes": 19795
         },
         {
           "path": "src/server/operations/copilot-conversation.ts",
@@ -6112,8 +6112,8 @@
         },
         {
           "path": "src/server/operations/copilot-handler.ts",
-          "sha256": "9252543c42cb2aa86f3d6facfcf19556a96415291c28ce6e11568c773120a04e",
-          "bytes": 13257
+          "sha256": "53309a10b43497d4b6dd465fe648d14991bfd39bbb61f17628398509a1a6afc7",
+          "bytes": 13477
         },
         {
           "path": "src/server/operations/copilot-policy.test.ts",

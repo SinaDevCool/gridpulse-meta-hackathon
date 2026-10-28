@@ -37,3 +37,7 @@ The full Product unit run passed 724 tests with one existing skip; subsequent ta
 Some capacity-ranking and national-alert research release gates remain failed; they do not support operational claims. Synthetic results are not measured savings, additional connection capacity, site safety certification or permission to dispatch. Review acknowledgement is not operational approval.
 
 Hackathon video and final validation summary will be linked after final qualification. No unsupported completed-submission claim is made here.
+
+## Event contribution and final qualification
+
+See [event contributions](EVENT_CONTRIBUTIONS.md), the [code patch](HACKATHON_CHANGES.patch), and [final qualification](VALIDATION.md).
